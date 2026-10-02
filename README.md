@@ -48,7 +48,7 @@ Dokumentasi project tersedia di folder [`docs/`](./docs/).
 * **Backend** → `docs/Backend/`
 * **Frontend** → `docs/Frontend/`
 * **QA** → `docs/QA/`
-* **Deployment** → `docs/Deployment/`
+* **DevOps** → `docs/DevOps/`
 
 ## Tech Stack
 
@@ -57,7 +57,7 @@ Dokumentasi project tersedia di folder [`docs/`](./docs/).
 * **Backend:** TBD
 * **Database:** PostgreSQL
 * **Version Control:** Git & GitHub
-* **Deployment:** TBD
+* **DevOps:** TBD
 
 > Tech stack yang masih TBD (To Be Determined) akan diperbarui setelah keputusan teknis project ditetapkan.
 
@@ -65,12 +65,12 @@ Dokumentasi project tersedia di folder [`docs/`](./docs/).
 
 | NIM     | Nama                  | Role               |
 | ------- | --------------------- | ------------------ |
-| 2411018 | Ardiyanti Kayana S.G  | UI/UX Designer     |
-| 2411002 | Akhmad Labib Rizki    | DBA                |
-| 2411014 | Zidan Al Mahbubi      | Backend Developer  |
-| 2411019 | Maulida Hanifa Putri  | Frontend Developer |
 | 2411001 | Angel Maharani N.     | QA Engineer        |
+| 2411002 | Akhmad Labib Rizki    | DBA                |
 | 2411009 | Pradigta Paramarta M. | DevOps             |
+| 2411014 | Zidan Al Mahbubi      | Backend Developer  |
+| 2411018 | Ardiyanti Kayana S.G  | UI/UX Designer     |
+| 2411019 | Maulida Hanifa Putri  | Frontend Developer |
 
 ## Project Status
 
