@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Kategori {
+  id         Int         @id @default(autoincrement())
+  nama       String      @unique
+  slug       String      @unique
+  deskripsi  String?
+  destinasis Destinasi[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+}
+
+model Destinasi {
+  id         Int       @id @default(autoincrement())
+  nama       String
+  slug       String    @unique
+  deskripsi  String    @db.Text
+  hargaTiket Decimal   @db.Decimal(10, 2)
+  jamBuka    String // misal: "08:00"
+  jamTutup   String // misal: "17:00"
+  lokasi     String // misal: "Borobudur, Magelang"
+  alamat     String?   @db.Text
+  fotoUrl    String?
+  isPopuler  Boolean   @default(false)
+  kategori   Kategori  @relation(fields: [kategoriId], references: [id], onDelete: Cascade)
+  kategoriId Int
+  layanans   Layanan[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+}
+
+model Layanan {
+  id             Int             @id @default(autoincrement())
+  tipe           TipeLayanan
+  nama           String
+  harga          Decimal         @db.Decimal(10, 2)
+  deskripsi      String?
+  destinasi      Destinasi?      @relation(fields: [destinasiId], references: [id], onDelete: SetNull)
+  destinasiId    Int?
+  detailPesanans DetailPesanan[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+enum TipeLayanan {
+  TIKET
+  TOUR_GUIDE
+  PENGINAPAN
+  TRANSPORTASI
+}
+
+model Pesanan {
+  id               Int             @id @default(autoincrement())
+  kodePesanan      String          @unique // misal: "MLK-20261002-001"
+  namaPemesan      String
+  email            String
+  telepon          String
+  tanggalKunjungan DateTime
+  jumlahOrang      Int             @default(1)
+  totalHarga       Decimal         @db.Decimal(12, 2)
+  status           StatusPesanan   @default(PENDING)
+  catatan          String?         @db.Text
+  detailPesanans   DetailPesanan[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+enum StatusPesanan {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model DetailPesanan {
+  id        Int     @id @default(autoincrement())
+  pesanan   Pesanan @relation(fields: [pesananId], references: [id], onDelete: Cascade)
+  pesananId Int
+  layanan   Layanan @relation(fields: [layananId], references: [id], onDelete: Restrict)
+  layananId Int
+  jumlah    Int     @default(1)
+  subtotal  Decimal @db.Decimal(12, 2)
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String // Hashed password (bcrypt)
+  nama      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
