@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import DestinasiCard from '@/components/DestinasiCard'
-import { Search, Compass, SlidersHorizontal, MapPin } from 'lucide-react'
+import { Search, Compass, SlidersHorizontal } from 'lucide-react'
 
 export default async function WisataPage({
   searchParams,

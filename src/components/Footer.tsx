@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Compass, MapPin, Phone, Mail, Heart } from 'lucide-react'
+import { Compass, MapPin, Phone, Mail } from 'lucide-react'
 
 export default function Footer() {
   return (

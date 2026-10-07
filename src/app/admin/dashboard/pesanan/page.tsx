@@ -6,11 +6,8 @@ import {
   Clock,
   XCircle,
   Loader2,
-  User,
   Phone,
   Mail,
-  Calendar,
-  AlertCircle,
 } from 'lucide-react'
 
 interface DetailItem {
@@ -46,25 +43,26 @@ export default function AdminPesananPage() {
   const [updatingId, setUpdatingId] = useState<number | null>(null)
   const [alertMsg, setAlertMsg] = useState('')
 
-  const fetchPesanans = async () => {
-    try {
-      setLoading(true)
-      const url = activeTab === 'ALL' ? '/api/admin/pesanan' : `/api/admin/pesanan?status=${activeTab}`
-      const res = await fetch(url)
-      const data = await res.json()
-      if (data.success) {
-        setPesanans(data.data)
-      }
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    fetchPesanans()
+    let cancelled = false
+    async function load() {
+      try {
+        setLoading(true)
+        const url = activeTab === 'ALL' ? '/api/admin/pesanan' : `/api/admin/pesanan?status=${activeTab}`
+        const res = await fetch(url)
+        const data = await res.json()
+        if (cancelled) return
+        if (data.success) setPesanans(data.data)
+      } catch (err) {
+        console.error(err)
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    load()
+    return () => { cancelled = true }
   }, [activeTab])
+
 
   const handleUpdateStatus = async (id: number, status: 'CONFIRMED' | 'CANCELLED') => {
     try {
