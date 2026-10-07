@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import {
   Search,
@@ -9,8 +8,6 @@ import {
   User,
   Phone,
   Mail,
-  Receipt,
-  ArrowRight,
   ShieldCheck,
   AlertCircle,
 } from 'lucide-react'

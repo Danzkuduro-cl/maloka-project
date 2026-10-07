@@ -31,6 +31,8 @@ model Destinasi {
   isPopuler  Boolean   @default(false)
   kategori   Kategori  @relation(fields: [kategoriId], references: [id], onDelete: Cascade)
   kategoriId Int
+  admin      Admin?    @relation(fields: [adminId], references: [id], onDelete: SetNull)
+  adminId    Int?
   layanans   Layanan[]
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
@@ -67,6 +69,8 @@ model Pesanan {
   totalHarga       Decimal         @db.Decimal(12, 2)
   status           StatusPesanan   @default(PENDING)
   catatan          String?         @db.Text
+  admin            Admin?          @relation(fields: [adminId], references: [id], onDelete: SetNull)
+  adminId          Int?
   detailPesanans   DetailPesanan[]
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
@@ -89,10 +93,12 @@ model DetailPesanan {
 }
 
 model Admin {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String // Hashed password (bcrypt)
-  nama      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int         @id @default(autoincrement())
+  email      String      @unique
+  password   String // Hashed password (bcrypt)
+  nama       String
+  destinasis Destinasi[] // Relasi: Admin mengelola banyak destinasi
+  pesanans   Pesanan[]   // Relasi: Admin memproses banyak pesanan
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
 }

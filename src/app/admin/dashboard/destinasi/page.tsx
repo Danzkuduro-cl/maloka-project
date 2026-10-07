@@ -1,11 +1,10 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
+import Image from 'next/image'
 import {
   Plus,
   Trash2,
-  MapPin,
-  Clock,
   Sparkles,
   Loader2,
   X,
@@ -59,7 +58,7 @@ export default function AdminDestinasiPage() {
   const [isPopuler, setIsPopuler] = useState(false)
   const [deskripsi, setDeskripsi] = useState('')
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       setLoading(true)
       const [resDest, resKat] = await Promise.all([
@@ -81,11 +80,37 @@ export default function AdminDestinasiPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [kategoriId])
 
   useEffect(() => {
-    fetchData()
+    let cancelled = false
+    async function load() {
+      try {
+        setLoading(true)
+        const [resDest, resKat] = await Promise.all([
+          fetch('/api/admin/destinasi'),
+          fetch('/api/kategori'),
+        ])
+        const dataDest = await resDest.json()
+        const dataKat = await resKat.json()
+        if (cancelled) return
+        if (dataDest.success) setDestinasis(dataDest.data)
+        if (dataKat.success) {
+          setCategories(dataKat.data)
+          if (dataKat.data.length > 0) {
+            setKategoriId((prev) => prev || String(dataKat.data[0].id))
+          }
+        }
+      } catch (err) {
+        console.error(err)
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    load()
+    return () => { cancelled = true }
   }, [])
+
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -214,9 +239,11 @@ export default function AdminDestinasiPage() {
                 destinasis.map((dest) => (
                   <tr key={dest.id} className="hover:bg-gray-50/80 transition-colors">
                     <td className="py-4 px-6 flex items-center gap-3">
-                      <img
+                      <Image
                         src={dest.fotoUrl || 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=100&q=80'}
                         alt={dest.nama}
+                        width={48}
+                        height={48}
                         className="w-12 h-12 rounded-xl object-cover bg-gray-100 shrink-0"
                       />
                       <div>

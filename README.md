@@ -39,7 +39,8 @@ Versi awal Maloka berfokus pada:
 
 ## Documentation
 
-Dokumentasi project tersedia di folder [`docs/`](./docs/).
+* 📖 **Panduan Frontend Developer:** [`FRONTEND_GUIDE.md`](./FRONTEND_GUIDE.md) — Panduan lengkap zona file, aturan anti merge-conflict, cheatsheet API, dan Git workflow untuk Frontend Developer.
+* Dokumentasi lainnya tersedia di folder [`docs/`](./docs/).
 
 ### Documentation Structure
 
@@ -76,4 +77,3 @@ Dokumentasi project tersedia di folder [`docs/`](./docs/).
 
 **Status:** In Development
 
->>>>>>> e0d3238a67f4cd5ed57f4a1a57d89916a827fd84

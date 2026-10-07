@@ -87,6 +87,7 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1200&q=80',
       isPopuler: true,
       kategoriId: katBudaya.id,
+      adminId: admin.id,
     },
   })
 
@@ -104,6 +105,7 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
       isPopuler: true,
       kategoriId: katAlam.id,
+      adminId: admin.id,
     },
   })
 
@@ -121,10 +123,11 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1200&q=80',
       isPopuler: true,
       kategoriId: katAlam.id,
+      adminId: admin.id,
     },
   })
 
-  const mendut = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Candi Mendut & Vihara Mendut',
       slug: 'candi-mendut',
@@ -138,10 +141,11 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&w=1200&q=80',
       isPopuler: false,
       kategoriId: katReligi.id,
+      adminId: admin.id,
     },
   })
 
-  const svargabumi = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Svargabumi Borobudur',
       slug: 'svargabumi-borobudur',
@@ -155,10 +159,11 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80',
       isPopuler: true,
       kategoriId: katEdukasi.id,
+      adminId: admin.id,
     },
   })
 
-  const kulinerBeong = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Sentra Kuliner Mangut Beong Sehati',
       slug: 'mangut-beong-sehati',
@@ -172,6 +177,7 @@ async function main() {
       fotoUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80',
       isPopuler: false,
       kategoriId: katKuliner.id,
+      adminId: admin.id,
     },
   })
 
@@ -276,6 +282,7 @@ async function main() {
         jumlahOrang: 4,
         totalHarga: sampleLayanan.harga,
         status: 'CONFIRMED',
+        adminId: admin.id,
         catatan: 'Tolong siapkan supir yang ramah dan siap jam 04.15 di lobby hotel.',
         detailPesanans: {
           create: [

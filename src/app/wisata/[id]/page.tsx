@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/prisma'
 import {
@@ -64,13 +65,16 @@ export default async function DestinasiDetailPage({
     <div className="bg-gray-50 min-h-screen pb-16">
       {/* Hero Image Banner */}
       <div className="relative h-[340px] sm:h-[420px] lg:h-[480px] w-full bg-gray-900 overflow-hidden">
-        <img
+        <Image
           src={
             destinasi.fotoUrl ||
             'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1600&q=80'
           }
           alt={destinasi.nama}
-          className="w-full h-full object-cover opacity-75"
+          fill
+          className="object-cover opacity-75"
+          sizes="100vw"
+          priority
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-black/30" />
 

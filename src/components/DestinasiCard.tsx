@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MapPin, Clock, ArrowRight, Sparkles } from 'lucide-react'
 
 interface DestinasiCardProps {
@@ -30,14 +31,15 @@ export default function DestinasiCard({ destinasi }: DestinasiCardProps) {
     <div className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-100 shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
       {/* Image & Badge container */}
       <div className="relative aspect-4/3 overflow-hidden bg-gray-100">
-        <img
+        <Image
           src={
             destinasi.fotoUrl ||
             'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=800&q=80'
           }
           alt={destinasi.nama}
-          className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
-          loading="lazy"
+          fill
+          className="object-cover group-hover:scale-108 transition-transform duration-500"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60" />
 
