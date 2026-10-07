@@ -1,10 +1,44 @@
-Git Workflow & Aturan Penggunaan Repository Maloka
+Git Workflow & Aturan Repository Maloka
 
-Dokumen ini berisi aturan dan alur kerja penggunaan Git dan GitHub dalam project Maloka. Tujuannya agar setiap anggota dapat bekerja secara terpisah tanpa mengganggu branch "main", serta menjaga project tetap terorganisir.
+Dokumen ini berisi panduan penggunaan Git dan GitHub dalam project Maloka.
+
+Tujuan dari workflow ini adalah:
+
+- Menjaga branch "main" tetap stabil.
+- Memisahkan pekerjaan setiap anggota tim.
+- Mengurangi risiko konflik kode.
+- Memastikan setiap perubahan diperiksa sebelum masuk ke "main".
+- Menjaga proses development tetap terstruktur dan terdokumentasi.
 
 ---
 
-1. Clone Repository
+📌 Struktur Branch
+
+Branch utama yang digunakan:
+
+main
+│
+├── feature/frontend
+├── feature/backend
+├── feature/database
+├── feature/uiux
+├── feature/qa
+└── chore
+
+Jenis Branch
+
+Branch| Kegunaan
+"main"| Branch utama dan versi stabil project
+"feature/..."| Pengembangan fitur atau pekerjaan tertentu
+"fix/..."| Perbaikan bug atau error
+"docs/..."| Perubahan dokumentasi
+"chore"| Konfigurasi, maintenance, dan pekerjaan DevOps
+
+«Catatan: Setiap anggota wajib bekerja pada branch masing-masing dan tidak melakukan coding langsung pada "main".»
+
+---
+
+🚀 1. Clone Repository
 
 Setiap anggota melakukan clone repository ke komputer masing-masing.
 
@@ -18,13 +52,17 @@ Cek branch yang tersedia:
 
 git branch
 
-«Jangan langsung melakukan coding di branch "main".»
+Setelah melakukan clone, repository biasanya berada pada branch default yaitu:
+
+main
+
+«Jangan mulai coding sebelum berpindah ke branch tugas masing-masing.»
 
 ---
 
-2. Gunakan Branch Sesuai Tugas
+🌿 2. Pindah ke Branch Masing-Masing
 
-Setiap anggota bekerja pada branch yang telah ditentukan.
+Setiap anggota memiliki branch yang telah ditentukan sesuai tugas.
 
 Contoh:
 
@@ -38,85 +76,116 @@ Pindah ke branch masing-masing:
 
 git switch feature/nama-branch
 
-Contoh:
+Contoh untuk anggota Backend:
 
 git switch feature/backend
 
-Pastikan branch yang aktif sudah benar:
+Kemudian cek branch aktif:
 
 git branch
 
-Branch yang aktif ditandai dengan "*".
-
 Contoh:
 
-* feature/backend
   main
+* feature/backend
+
+Tanda "*" menunjukkan branch yang sedang aktif.
+
+«Setelah berada di branch masing-masing, seluruh proses coding dilakukan di branch tersebut.»
 
 ---
 
-3. Sebelum Mulai Coding, Sinkronkan dengan "main"
+🔄 3. Sinkronisasi dengan "main"
 
-Sebelum mulai pekerjaan baru, anggota wajib memastikan branch-nya sudah mendapatkan perubahan terbaru dari "main".
+Sebelum memulai pekerjaan baru, pastikan branch sudah mendapatkan perubahan terbaru dari "main".
 
-Pertama, ambil informasi terbaru dari repository:
+Ambil informasi terbaru dari repository:
 
 git fetch origin
 
-Kemudian pastikan berada di branch pekerjaan sendiri:
+Pastikan berada di branch sendiri:
 
 git switch feature/nama-branch
 
-Gabungkan perubahan terbaru dari "main":
+Kemudian gabungkan perubahan terbaru dari "main":
 
 git merge origin/main
 
-Jika tidak ada konflik, branch sudah mendapatkan perubahan terbaru dari "main".
+Jika tidak terdapat konflik, branch sudah mendapatkan perubahan terbaru dari "main".
 
-«Tujuan langkah ini adalah agar pekerjaan yang dilakukan berdasarkan versi project terbaru dan mengurangi kemungkinan konflik saat Pull Request.»
+Kenapa harus dilakukan?
+
+Misalnya:
+
+7 Oktober
+main
+ ↓
+Anggota clone repository
+ ↓
+Mulai coding
+
+Kemudian Backend melakukan perubahan dan berhasil masuk ke "main" pada 8 Oktober.
+
+Jika Frontend masih menggunakan versi lama, maka perubahan Backend tidak akan otomatis muncul di komputer Frontend.
+
+Frontend harus melakukan sinkronisasi:
+
+git fetch origin
+git merge origin/main
+
+Dengan begitu branch Frontend mendapatkan versi "main" terbaru.
+
+«Sebelum memulai pekerjaan baru, biasakan melakukan sinkronisasi dengan "main".»
 
 ---
 
-4. Lakukan Pekerjaan / Coding
+💻 4. Coding
 
-Kerjakan tugas sesuai pembagian masing-masing.
+Setelah berada pada branch masing-masing, anggota dapat mulai mengerjakan tugas.
 
-Contoh:
+Contoh pembagian:
 
 feature/backend
-→ mengerjakan API / Backend
+→ Backend / API
 
 feature/frontend
-→ mengerjakan tampilan dan fitur Frontend
+→ Tampilan dan fitur Frontend
 
 feature/database
-→ mengerjakan database / Prisma
+→ Database / Prisma
 
 feature/uiux
-→ mengerjakan desain dan kebutuhan UI/UX
+→ UI/UX dan implementasi desain
 
 feature/qa
-→ mengerjakan testing dan perbaikan terkait QA
+→ Testing dan Quality Assurance
 
-Selama proses coding, jangan berpindah atau melakukan coding langsung di "main".
+Selama proses development:
+
+- Jangan coding di "main".
+- Jangan mengubah pekerjaan anggota lain tanpa koordinasi.
+- Fokus pada tugas yang diberikan.
+- Hindari memasukkan perubahan yang tidak berkaitan dengan tugas.
 
 ---
 
-5. Periksa Perubahan Sebelum Commit
+🔍 5. Periksa Perubahan
 
-Setelah selesai melakukan perubahan, cek file yang berubah:
+Sebelum melakukan commit, periksa perubahan yang telah dibuat.
+
+Cek status:
 
 git status
 
-Untuk melihat detail perubahan:
+Melihat detail perubahan:
 
 git diff
 
-Pastikan hanya perubahan yang berkaitan dengan pekerjaan yang sedang dilakukan.
+Pastikan file yang berubah memang berkaitan dengan pekerjaan yang sedang dilakukan.
 
 ---
 
-6. Commit Perubahan
+📦 6. Commit Perubahan
 
 Masukkan perubahan ke staging:
 
@@ -130,22 +199,34 @@ Contoh:
 
 git commit -m "feat: add login page"
 
-Contoh format commit:
+Format Commit
 
-feat: fitur baru
-fix: memperbaiki bug
-docs: perubahan dokumentasi
-chore: perubahan konfigurasi / maintenance
-refactor: perubahan struktur kode tanpa mengubah fungsi
-test: menambahkan atau memperbaiki testing
+Gunakan prefix berikut:
 
-Commit message harus menggambarkan perubahan yang dilakukan.
+Prefix| Penggunaan
+"feat"| Menambahkan fitur baru
+"fix"| Memperbaiki bug
+"docs"| Mengubah dokumentasi
+"chore"| Konfigurasi / maintenance
+"refactor"| Perubahan struktur kode
+"test"| Menambah atau memperbaiki testing
+
+Contoh:
+
+feat: add login page
+fix: fix login validation
+docs: update API documentation
+chore: update project configuration
+refactor: simplify authentication logic
+test: add login test
+
+«Commit message harus menjelaskan perubahan yang dilakukan secara singkat dan jelas.»
 
 ---
 
-7. Push ke Branch Masing-Masing
+☁️ 7. Push ke Branch Masing-Masing
 
-Setelah commit selesai, push perubahan ke branch sendiri.
+Setelah melakukan commit, kirim perubahan ke branch masing-masing di GitHub.
 
 git push origin feature/nama-branch
 
@@ -153,64 +234,88 @@ Contoh:
 
 git push origin feature/backend
 
-«DILARANG melakukan push langsung ke "main".»
+⚠️ Penting
 
-Perubahan harus dikirim terlebih dahulu ke branch masing-masing.
+❌ Jangan push langsung ke main
+✅ Push ke branch masing-masing
+
+Perubahan tidak langsung masuk ke "main".
 
 ---
 
-8. Buat Pull Request
+🔀 8. Pull Request
 
-Setelah perubahan berhasil di-push ke GitHub:
-
-Branch masing-masing
-        ↓
-   Pull Request
-        ↓
-      main
-
-Buat Pull Request dari branch pekerjaan menuju:
-
-main
+Setelah perubahan berhasil di-push, buat Pull Request (PR) dari branch masing-masing menuju "main".
 
 Contoh:
 
-feature/backend → main
+feature/backend
+       ↓
+ Pull Request
+       ↓
+     main
 
-Pull Request digunakan untuk meminta agar perubahan yang telah dibuat dapat diperiksa sebelum digabungkan ke "main".
+Pull Request digunakan untuk meminta agar perubahan diperiksa sebelum digabungkan ke branch utama.
 
 ---
 
-9. Proses Review
+🧪 9. CI & Code Review
 
-Setelah Pull Request dibuat:
+Setelah Pull Request dibuat, proses pemeriksaan dilakukan.
 
-1. CI akan menjalankan pengecekan otomatis.
-2. Anggota terkait dapat melakukan review.
-3. DevOps / Team Lead melakukan pemeriksaan.
-4. Pastikan tidak ada konflik.
-5. Pastikan CI berhasil.
-6. Pastikan perubahan sesuai dengan tugas.
+CI
 
-Jika masih terdapat kesalahan, lakukan perbaikan pada branch yang sama lalu push kembali.
+CI (Continuous Integration) akan menjalankan pengecekan otomatis terhadap project.
+
+Contoh pengecekan:
+
+Install Dependencies
+        ↓
+      Lint
+        ↓
+      Build
+
+Jika CI gagal:
+
+❌ CI Failed
+
+Perbaiki masalah pada branch masing-masing, kemudian:
 
 git add .
-git commit -m "fix: fix review feedback"
+git commit -m "fix: fix CI error"
 git push origin feature/nama-branch
 
 Pull Request akan otomatis diperbarui.
 
 ---
 
-10. Approval dan Merge
+👀 Code Review
 
-Jika perubahan sudah dinyatakan layak:
+Pull Request kemudian diperiksa oleh anggota yang ditunjuk, terutama:
 
-CI ✅
-Review ✅
-Tidak ada conflict ✅
+- DevOps / Team Lead
+- Anggota yang berkaitan dengan fitur
+- Reviewer lain jika diperlukan
+
+Hal yang diperiksa:
+
+- Apakah perubahan sesuai dengan tugas?
+- Apakah terdapat error?
+- Apakah terdapat conflict?
+- Apakah CI berhasil?
+- Apakah perubahan mengganggu fitur lain?
+
+---
+
+✅ 10. Approval & Merge
+
+Jika perubahan sudah dianggap layak:
+
+CI              ✅
+Code Review     ✅
+No Conflict     ✅
         ↓
-    APPROVE
+     APPROVE
         ↓
       MERGE
         ↓
@@ -218,61 +323,146 @@ Tidak ada conflict ✅
 
 Perubahan hanya boleh masuk ke "main" setelah mendapatkan persetujuan sesuai aturan project.
 
+Alur Approval
+
+Developer
+    ↓
+Push ke branch sendiri
+    ↓
+Pull Request
+    ↓
+CI
+    ↓
+Review
+    ↓
+DevOps / Team Lead Approval
+    ↓
+Merge
+    ↓
+main
+
 ---
 
-11. Setelah Pull Request Di-merge
+🔄 11. Setelah Merge
 
-Setelah perubahan berhasil masuk ke "main", anggota harus memperbarui branch lokalnya sebelum memulai pekerjaan berikutnya.
+Setelah Pull Request berhasil di-merge ke "main", perubahan tersebut sudah menjadi bagian dari project utama.
+
+Sebelum memulai pekerjaan berikutnya, anggota harus menyinkronkan branch mereka dengan "main".
 
 git switch feature/nama-branch
 git fetch origin
 git merge origin/main
 
-Dengan demikian branch masing-masing tetap mengikuti perkembangan terbaru project.
+Setelah branch mendapatkan perubahan terbaru, anggota dapat melanjutkan pekerjaan.
 
 ---
 
-Alur Singkat
+📋 Alur Lengkap
 
-Secara keseluruhan, workflow yang digunakan adalah:
+┌─────────────────────┐
+│   Clone Repository  │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│  Switch ke Branch   │
+│     Masing-masing   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   Sync dengan main  │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│       Coding        │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   git status/diff   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│       Commit        │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│ Push ke Branch      │
+│     Masing-masing   │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│   Pull Request      │
+│      → main         │
+└──────────┬──────────┘
+           ↓
+┌─────────────────────┐
+│     CI + Review     │
+└──────────┬──────────┘
+           ↓
+     ┌─────┴─────┐
+     │           │
+   Gagal       Lulus
+     │           │
+     ↓           ↓
+   Fix       Approval
+     │           │
+     └─────┐     ↓
+           │   Merge
+           │     ↓
+           └──→ main
+                 ↓
+          Sync Branch
+                 ↓
+        Pekerjaan Berikutnya
 
-1. Clone Repository
-       ↓
-2. Masuk ke Branch Masing-Masing
-       ↓
-3. Sync dengan main
-       ↓
-4. Coding
-       ↓
-5. git status / git diff
-       ↓
-6. git add
-       ↓
-7. git commit
-       ↓
-8. git push ke branch sendiri
-       ↓
-9. Pull Request → main
-       ↓
-10. CI + Review
-       ↓
-11. Approval
-       ↓
-12. Merge → main
-       ↓
-13. Sync branch dengan main
-       ↓
-14. Mulai pekerjaan berikutnya
+---
 
-Aturan Utama
+⚠️ Aturan Utama
 
-1. Dilarang coding langsung di "main".
-2. Dilarang push langsung ke "main".
+1. Dilarang melakukan coding langsung di "main".
+2. Dilarang melakukan push langsung ke "main".
 3. Setiap anggota wajib menggunakan branch masing-masing.
 4. Setiap perubahan menuju "main" harus melalui Pull Request.
-5. Pull Request harus melewati proses CI dan review.
-6. Sebelum memulai pekerjaan baru, branch wajib disinkronkan dengan "main".
-7. Commit message harus menjelaskan perubahan yang dilakukan.
-8. Jangan memasukkan perubahan yang tidak berhubungan dengan tugas ke dalam commit.
-9. Jika terdapat konflik saat proses merge, selesaikan konflik terlebih dahulu sebelum melanjutkan merge.
-10. "main" digunakan sebagai branch utama/stabil project.
+5. Pull Request harus melewati CI dan code review.
+6. Sebelum memulai pekerjaan baru, branch harus disinkronkan dengan "main".
+7. Gunakan commit message yang jelas dan sesuai format.
+8. Jangan memasukkan perubahan yang tidak berkaitan dengan pekerjaan ke dalam commit.
+9. Jika terjadi conflict, conflict harus diselesaikan sebelum merge.
+10. "main" digunakan sebagai branch utama dan versi stabil project.
+11. Perubahan yang sudah di-merge ke "main" menjadi acuan untuk pekerjaan berikutnya.
+12. Jika terdapat perubahan besar atau berpotensi memengaruhi anggota lain, komunikasikan terlebih dahulu kepada tim.
+
+---
+
+👥 Tanggung Jawab
+
+Developer
+
+- Bekerja pada branch masing-masing.
+- Melakukan commit secara teratur.
+- Push perubahan ke branch sendiri.
+- Membuat Pull Request.
+- Memperbaiki masalah yang ditemukan saat CI atau review.
+
+DevOps / Team Lead
+
+- Mengatur workflow Git dan GitHub.
+- Menjaga branch "main".
+- Memastikan CI berjalan.
+- Melakukan atau mengatur proses review.
+- Memastikan Pull Request mengikuti aturan project.
+- Mengawasi proses merge ke "main".
+
+Seluruh Anggota
+
+- Mengikuti aturan Git workflow.
+- Tidak melakukan push langsung ke "main".
+- Melakukan sinkronisasi sebelum memulai pekerjaan baru.
+- Mengomunikasikan conflict atau masalah yang dapat memengaruhi anggota lain.
+
+---
+
+🎯 Prinsip Utama
+
+«Branch untuk bekerja, Pull Request untuk memeriksa, "main" untuk versi stabil.»
+
+Semua anggota bebas mengembangkan tugasnya pada branch masing-masing, tetapi perubahan yang masuk ke "main" harus melalui proses Pull Request → CI → Review → Approval → Merge.
