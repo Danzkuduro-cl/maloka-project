@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Compass, Menu, X, CalendarCheck, MapPin, Shield } from 'lucide-react'
+import { Compass, Menu, X, CalendarCheck, Shield } from 'lucide-react'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

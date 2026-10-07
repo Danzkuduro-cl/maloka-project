@@ -127,7 +127,7 @@ async function main() {
     },
   })
 
-  const mendut = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Candi Mendut & Vihara Mendut',
       slug: 'candi-mendut',
@@ -145,7 +145,7 @@ async function main() {
     },
   })
 
-  const svargabumi = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Svargabumi Borobudur',
       slug: 'svargabumi-borobudur',
@@ -163,7 +163,7 @@ async function main() {
     },
   })
 
-  const kulinerBeong = await prisma.destinasi.create({
+  await prisma.destinasi.create({
     data: {
       nama: 'Sentra Kuliner Mangut Beong Sehati',
       slug: 'mangut-beong-sehati',

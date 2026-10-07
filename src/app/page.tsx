@@ -35,8 +35,8 @@ export default async function HomePage() {
     orderBy: { id: 'asc' },
   })
 
-  // Query layanan unggulan
-  const sampleLayanan = await prisma.layanan.findMany({
+  // Query layanan unggulan (reserved for future dynamic rendering)
+  void prisma.layanan.findMany({
     take: 4,
     include: {
       destinasi: { select: { nama: true } },
