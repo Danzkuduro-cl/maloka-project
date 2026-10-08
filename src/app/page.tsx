@@ -15,7 +15,9 @@ import {
   MapPin,
 } from 'lucide-react'
 
-// Server Component: Langsung ambil data dari PostgreSQL
+// Server Component: Pakai dynamic rendering agar tidak mencoba query DB saat build di CI
+export const dynamic = 'force-dynamic'
+
 export default async function HomePage() {
   // Query kategori + jumlah destinasi
   const kategoriList = await prisma.kategori.findMany({
