@@ -3,6 +3,8 @@ import { prisma } from '@/lib/prisma'
 import DestinasiCard from '@/components/DestinasiCard'
 import { Search, Compass, SlidersHorizontal } from 'lucide-react'
 
+export const dynamic = 'force-dynamic'
+
 export default async function WisataPage({
   searchParams,
 }: {
