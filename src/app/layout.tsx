@@ -1,16 +1,22 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Manrope, Kaushan_Script, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const manrope = Manrope({
+  variable: '--font-sans',
+  subsets: ['latin'],
+})
+
+const kaushanScript = Kaushan_Script({
+  weight: '400',
+  variable: '--font-script',
   subsets: ['latin'],
 })
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+  variable: '--font-mono',
   subsets: ['latin'],
 })
 
@@ -28,9 +34,9 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${kaushanScript.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-gray-50 text-gray-900 selection:bg-emerald-500 selection:text-white">
+      <body className="min-h-full flex flex-col bg-white text-teks-isi font-sans selection:bg-tosca selection:text-white">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

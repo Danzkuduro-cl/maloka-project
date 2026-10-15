@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FFFFFF;
+  --foreground: #2B3A42;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-tosca: #1AA3C6;
+  --color-tosca-tua: #1389A8;
+  --color-biru-tua: #0E3B4C;
+  --color-biru-sangat-tua: #0A2C3A;
+  --color-biru-muda: #E6F5F9;
+  --color-biru-garis: #CDEAF2;
+  --color-putih: #FFFFFF;
+  --color-teks-isi: #2B3A42;
+  --color-teks-sekunder: #6B7A82;
+  --color-placeholder: #98A5AB;
+  --color-border: #DCE7EB;
+  --color-bintang: #F5A524;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-script: var(--font-script), cursive;
+  --font-mono: var(--font-mono), monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #FFFFFF;
+  color: #2B3A42;
+  font-family: var(--font-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+/* Dukungan prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
