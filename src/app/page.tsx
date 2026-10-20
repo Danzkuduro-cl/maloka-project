@@ -80,6 +80,8 @@ function getCategoryIcon(slug: string) {
   }
 }
 
+export const dynamic = 'force-dynamic'
+
 // Server Component: Mengambil data langsung dari PostgreSQL
 export default async function HomePage() {
   // Query kategori + jumlah destinasi

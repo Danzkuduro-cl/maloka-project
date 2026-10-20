@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/prisma'
 import {
-  Users,
   MapPin,
   ClipboardList,
   CheckCircle2,

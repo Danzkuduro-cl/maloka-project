@@ -149,6 +149,8 @@ function getCompanionImage(destinasi: {
   )
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function DestinasiDetailPage({
   params,
 }: {

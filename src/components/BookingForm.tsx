@@ -3,12 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {
-  Ticket,
-  Users,
-  Home,
-  Truck,
   CheckCircle2,
-  Calendar,
   AlertCircle,
   Loader2,
   ArrowRight,

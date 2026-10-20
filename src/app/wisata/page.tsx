@@ -41,6 +41,8 @@ function getCategoryIcon(slug: string) {
   }
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function WisataPage({
   searchParams,
 }: {
