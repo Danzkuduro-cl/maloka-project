@@ -10,9 +10,6 @@ import {
   Users,
   Home,
   Truck,
-  CheckCircle2,
-  ShieldCheck,
-  MapPin,
   Luggage,
   Mountain,
   Landmark,
@@ -130,7 +127,7 @@ export default async function HomePage() {
           2. HERO SECTION + SEARCH BOX + KATEGORI (Digabung agar background menyatu)
       ========================================================================= */}
       <div className="relative bg-biru-muda">
-        <section className="relative min-h-[420px] lg:min-h-[500px] flex items-center justify-start overflow-hidden pt-16 pb-20 lg:pb-24">
+        <section className="relative min-h-105 lg:min-h-125 flex items-center justify-start overflow-hidden pt-16 pb-20 lg:pb-24">
           {/* Background Full Width Photo */}
           <img
             src={heroImage}
@@ -139,13 +136,14 @@ export default async function HomePage() {
           />
 
           {/* Dark Overlay Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-r from-biru-tua/90 via-biru-tua/65 to-biru-tua/20" />
+          <div className="absolute inset-0 bg-linear-to-r from-biru-tua/90 via-biru-tua/65 to-biru-tua/20" />
 
           {/* Hero Content Container */}
           <div className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 text-left z-10">
-            <div className="max-w-2xl">
-              {/* Eyebrow Script */}
-              <span className="font-script text-white text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 block drop-shadow-xs">
+            {/* Kontainer teks dengan jarak antar baris yang disesuaikan */}
+            <div className="max-w-2xl mt-8 sm:mt-12 lg:mt-16">
+              {/* Eyebrow Script (Diberi jarak bawah lebih lega ke judul utama) */}
+              <span className="font-script text-white text-xl sm:text-2xl lg:text-3xl mb-4 sm:mb-5 block drop-shadow-xs">
                 Portal Resmi Informasi & Pemesanan Wisata Magelang
               </span>
 
@@ -155,14 +153,14 @@ export default async function HomePage() {
                 <span className="text-[#9BE3F5]">Magelang</span> Lebih Mudah &amp; Terencana
               </h1>
 
-              {/* Description */}
-              <p className="mt-4 sm:mt-5 text-sm sm:text-base text-white/90 leading-relaxed max-w-xl">
+              {/* Description (Diberi jarak atas lebih lega dari judul utama) */}
+              <p className="mt-5 sm:mt-6 text-sm sm:text-base text-white/90 leading-relaxed max-w-xl">
                 Dari kemegahan Candi Borobudur hingga siluet sunrise Menoreh dan gardu pandang Merapi.
                 Pesan tiket, pemandu profesional, hingga transportasi wisata dalam satu platform.
               </p>
 
-              {/* Action Buttons */}
-              <div className="mt-7 flex flex-wrap items-center gap-3.5">
+              {/* Action Buttons (Diberi jarak atas lebih lega dari deskripsi) */}
+              <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3.5">
                 <Link
                   href="/wisata"
                   className={`${BTN_BASE} ${BTN_MD} bg-tosca hover:bg-tosca-tua text-white shadow-md hover:shadow-lg hover:shadow-tosca/30`}
@@ -178,26 +176,6 @@ export default async function HomePage() {
                   <span>Layanan Kami</span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
-              </div>
-
-              {/* Trust Highlights */}
-              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 pt-6 border-t border-white/20 text-xs sm:text-sm text-white/90">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#9BE3F5] shrink-0" />
-                  <span>Tiket Resmi &amp; Instan</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#9BE3F5] shrink-0" />
-                  <span>Pemandu HPI Berlisensi</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-[#9BE3F5] shrink-0" />
-                  <span>Paket Rombongan &amp; Solo</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-[#9BE3F5] shrink-0" />
-                  <span>Rute Wisata Lengkap</span>
-                </div>
               </div>
             </div>
           </div>
@@ -225,7 +203,7 @@ export default async function HomePage() {
             {/* Tombol */}
             <button
               type="submit"
-              className={`${BTN_BASE} h-11 px-5 sm:px-7 text-sm text-white bg-gradient-to-r from-tosca to-biru-tua shadow-md hover:shadow-lg hover:shadow-tosca/30`}
+              className={`${BTN_BASE} h-11 px-5 sm:px-7 text-sm text-white bg-linear-to-r from-tosca to-biru-tua shadow-md hover:shadow-lg hover:shadow-tosca/30`}
             >
               <span className="hidden sm:inline">Cari Wisata</span>
               <span className="sm:hidden">Cari</span>
@@ -271,7 +249,7 @@ export default async function HomePage() {
                 /* Wrapper luar untuk posisi busur */
                 <div
                   key={kat.id}
-                  className="flex-1 min-w-0 max-w-[195px]"
+                  className="flex-1 min-w-0 max-w-48.75"
                   style={{ transform: `translateY(${ty}px)` }}
                 >
                   {/* Elemen dalam untuk hover animasi naik sedikit */}
@@ -280,7 +258,7 @@ export default async function HomePage() {
                     className="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02]"
                   >
                     {/* Visual Card: Gaya Ikon Maloka persis Kuliner/Religi */}
-                    <div className="w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative bg-gradient-to-tr from-biru-tua to-tosca flex flex-col items-center justify-center p-3 text-white">
+                    <div className="w-full aspect-4/3 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative bg-linear-to-tr from-biru-tua to-tosca flex flex-col items-center justify-center p-3 text-white">
                       <IconComponent className="w-10 h-10 text-white/95 mb-1 stroke-[1.8] group-hover:scale-110 transition-transform duration-300" />
                       <span className="text-[11px] font-semibold text-white/80 tracking-wide">
                         Maloka
@@ -318,10 +296,10 @@ export default async function HomePage() {
                   key={kat.id}
                   href={`/wisata?kategori=${kat.slug}`}
                   className={`group flex flex-col items-center text-center p-2.5 rounded-2xl bg-white/60 shadow-xs hover:shadow-md transition-all active:scale-95 ${
-                    isLastOdd ? 'col-span-2 max-w-[200px] mx-auto w-full' : ''
+                    isLastOdd ? 'col-span-2 max-w-50 mx-auto w-full' : ''
                   }`}
                 >
-                  <div className="w-full aspect-[4/3] rounded-xl bg-gradient-to-tr from-biru-tua to-tosca flex flex-col items-center justify-center p-2.5 text-white shadow-xs">
+                  <div className="w-full aspect-4/3 rounded-xl bg-linear-to-tr from-biru-tua to-tosca flex flex-col items-center justify-center p-2.5 text-white shadow-xs">
                     <IconComponent className="w-8 h-8 text-white/95 mb-0.5 stroke-[1.8]" />
                     <span className="text-[10px] font-semibold text-white/80">Maloka</span>
                   </div>
@@ -413,7 +391,7 @@ export default async function HomePage() {
                 <Link
                   key={item.title}
                   href="/pesan"
-                  className="group bg-white rounded-3xl border border-border shadow-md hover:border-tosca hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between p-4 sm:p-5 min-h-[190px] lg:aspect-[4/3]"
+                  className="group bg-white rounded-3xl border border-border shadow-md hover:border-tosca hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between p-4 sm:p-5 min-h-47.5 lg:aspect-4/3"
                 >
                   <div>
                     <div
@@ -449,7 +427,7 @@ export default async function HomePage() {
             {/* Kolase Foto (Kiri, 5-6 kolom) */}
             <div className="lg:col-span-6 flex gap-4 items-center justify-center">
               {/* Foto Besar Tinggi Melengkung (Kiri) */}
-              <div className="w-1/2 aspect-[3/4] rounded-t-full rounded-b-3xl overflow-hidden shadow-xl">
+              <div className="w-1/2 aspect-3/4 rounded-t-full rounded-b-3xl overflow-hidden shadow-xl">
                 <img
                   src={destinasiPopuler[0]?.fotoUrl || FALLBACK_HERO_IMAGE}
                   alt="Destinasi Utama"
@@ -459,14 +437,14 @@ export default async function HomePage() {
 
               {/* 2 Foto Bersusun (Kanan) */}
               <div className="w-1/2 flex flex-col gap-4">
-                <div className="aspect-[3/2] rounded-[1.3rem] overflow-hidden shadow-md">
+                <div className="aspect-3/2 rounded-[1.3rem] overflow-hidden shadow-md">
                   <img
                     src={destinasiPopuler[1]?.fotoUrl || FALLBACK_HERO_IMAGE}
                     alt="Destinasi Kedua"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="aspect-[3/2] rounded-[1.2rem] overflow-hidden shadow-md">
+                <div className="aspect-3/2 rounded-[1.2rem] overflow-hidden shadow-md">
                   <img
                     src={destinasiPopuler[2]?.fotoUrl || FALLBACK_HERO_IMAGE}
                     alt="Destinasi Ketiga"
@@ -515,7 +493,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* =========================================================================
+            {/* =========================================================================
           7. GALERI DESTINASI (Mosaik 5 Kolom)
       ========================================================================= */}
       {destinasiPopuler.length >= 3 && (
@@ -527,11 +505,10 @@ export default async function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-biru-tua tracking-tight mb-12 sm:mb-16">
               Galeri Destinasi
             </h2>
-
-            {/* Desktop 5-Column Mosaic */}
+            {/* Desktop 5-Column Mosaic — Foto Tidak Ganda */}
             <div className="hidden lg:grid grid-cols-5 gap-4 items-center">
-              {/* Kolom 1 (1 Foto) */}
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm">
+              {/* Kolom 1 */}
+              <div className="aspect-3/4 rounded-2xl overflow-hidden shadow-sm">
                 <Link href={`/wisata/${destinasiPopuler[0].id}`} className="block w-full h-full group">
                   <img
                     src={destinasiPopuler[0].fotoUrl || FALLBACK_HERO_IMAGE}
@@ -540,81 +517,77 @@ export default async function HomePage() {
                   />
                 </Link>
               </div>
-
-              {/* Kolom 2 (2 Foto Bertumpuk) */}
+              {/* Kolom 2 — Atas */}
               <div className="flex flex-col gap-4">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-sm">
                   <Link href={`/wisata/${destinasiPopuler[1 % destinasiPopuler.length].id}`} className="block w-full h-full group">
                     <img
-                      src={destinasiPopuler[1 % destinasiPopuler.length].fotoUrl || FALLBACK_HERO_IMAGE}
+                      src="https://images.unsplash.com/photo-1530406574868-4b989cf06d8b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                       alt={destinasiPopuler[1 % destinasiPopuler.length].nama}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
                 </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-sm">
                   <Link href={`/wisata/${destinasiPopuler[2 % destinasiPopuler.length].id}`} className="block w-full h-full group">
                     <img
-                      src={destinasiPopuler[2 % destinasiPopuler.length].fotoUrl || FALLBACK_HERO_IMAGE}
+                      src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
                       alt={destinasiPopuler[2 % destinasiPopuler.length].nama}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
                 </div>
               </div>
-
-              {/* Kolom 3 (1 Foto Tinggi Tengah) */}
-              <div className="aspect-[3/5] rounded-2xl overflow-hidden shadow-md ring-2 ring-tosca/30">
+              {/* Kolom 3 — Tengah Tinggi */}
+              <div className="aspect-3/5 rounded-2xl overflow-hidden shadow-md ring-2 ring-tosca/30">
                 <Link href={`/wisata/${destinasiPopuler[3 % destinasiPopuler.length].id}`} className="block w-full h-full group">
                   <img
-                    src={destinasiPopuler[3 % destinasiPopuler.length].fotoUrl || FALLBACK_HERO_IMAGE}
-                    alt={destinasiPopuler[3 % destinasiPopuler.length].nama}
+                    src="https://images.unsplash.com/photo-1433086966358-54859d0ed716?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D  "
+                    alt="Pemandangan Magelang"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </Link>
               </div>
-
-              {/* Kolom 4 (2 Foto Bertumpuk) */}
+              {/* Kolom 4 — Bawah */}
               <div className="flex flex-col gap-4">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
-                  <Link href={`/wisata/${destinasiPopuler[4 % destinasiPopuler.length].id}`} className="block w-full h-full group">
-                    <img
-                      src={destinasiPopuler[4 % destinasiPopuler.length].fotoUrl || FALLBACK_HERO_IMAGE}
-                      alt={destinasiPopuler[4 % destinasiPopuler.length].nama}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </Link>
-                </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-sm">
+               {/* Kolom 4 — Atas */}
+              <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-sm">
+                <Link href={`/wisata/${destinasiPopuler[4 % destinasiPopuler.length].id}`} className="block w-full h-full group">
+                  <img
+                    src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D "
+                    alt="Pemandangan Magelang"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </Link>
+              </div>
+                <div className="aspect-4/3 rounded-2xl overflow-hidden shadow-sm">
                   <Link href={`/wisata/${destinasiPopuler[5 % destinasiPopuler.length].id}`} className="block w-full h-full group">
                     <img
-                      src={destinasiPopuler[5 % destinasiPopuler.length]?.fotoUrl || FALLBACK_HERO_IMAGE}
+                      src="https://plus.unsplash.com/premium_photo-1677829177642-30def98b0963?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D "
                       alt={destinasiPopuler[5 % destinasiPopuler.length].nama}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </Link>
                 </div>
               </div>
-
-              {/* Kolom 5 (1 Foto) */}
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-sm">
-                <Link href={`/wisata/${destinasiPopuler[0].id}`} className="block w-full h-full group">
+              {/* Kolom 5 — Berbeda dari kolom 1 */}
+              <div className="aspect-3/4 rounded-2xl overflow-hidden shadow-sm">
+                <Link href={`/wisata/${destinasiPopuler[2 % destinasiPopuler.length].id}`} className="block w-full h-full group">
                   <img
-                    src={destinasiPopuler[0].fotoUrl || FALLBACK_HERO_IMAGE}
-                    alt={destinasiPopuler[0].nama}
+                    src={destinasiPopuler[2 % destinasiPopuler.length].fotoUrl || FALLBACK_HERO_IMAGE}
+                    alt={destinasiPopuler[2 % destinasiPopuler.length].nama}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </Link>
               </div>
             </div>
-
             {/* Mobile / Tablet 2-Column Grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:hidden gap-3 sm:gap-4">
               {destinasiPopuler.map((dest) => (
                 <Link
                   key={dest.id}
                   href={`/wisata/${dest.id}`}
-                  className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xs group"
+                  className="aspect-4/3 rounded-2xl overflow-hidden shadow-xs group"
                 >
                   <img
                     src={dest.fotoUrl || FALLBACK_HERO_IMAGE}

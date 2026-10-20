@@ -18,7 +18,9 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const pathname = usePathname()
-  const isHome = pathname === '/'
+
+  // Halaman yang memiliki latar hero gelap di bagian atas (Beranda & Destinasi Wisata)
+  const isHeroPage = pathname === '/' || pathname.startsWith('/wisata')
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -53,11 +55,11 @@ export default function Navbar() {
     leaveTimer.current = setTimeout(() => setHovered(false), 250)
   }
 
-  // Navbar penuh tampil: di-scroll / kursor di atasnya / menu mobile terbuka.
-  const visible = !isHome || scrolled || hovered || mobileMenuOpen
+  // Navbar penuh tampil: jika bukan halaman hero, atau di-scroll / kursor di atasnya / menu mobile terbuka
+  const visible = !isHeroPage || scrolled || hovered || mobileMenuOpen
 
-  // Di atas foto hero teks putih, selain itu teks gelap
-  const onDark = isHome && !scrolled && !mobileMenuOpen
+  // Di atas foto hero (sebelum scroll): teks putih
+  const onDark = isHeroPage && !scrolled && !mobileMenuOpen
 
   const reveal = visible
     ? 'opacity-100 translate-y-0 blur-0'
@@ -102,7 +104,7 @@ export default function Navbar() {
               </div>
               <div
                 className={`flex items-center overflow-hidden whitespace-nowrap transition-all duration-500 ${EASE} ${
-                  visible ? 'max-w-[260px] opacity-100 ml-1' : 'max-w-0 opacity-0 ml-0'
+                  visible ? 'max-w-65 opacity-100 ml-1' : 'max-w-0 opacity-0 ml-0'
                 }`}
               >
                 <span
@@ -158,7 +160,7 @@ export default function Navbar() {
                   href="/pesan"
                   tabIndex={visible ? 0 : -1}
                   className="group/btn inline-flex items-center gap-1.5 px-5 py-2.5 text-sm font-semibold rounded-full text-white
-                    bg-gradient-to-r from-tosca to-biru-tua shadow-md hover:shadow-lg hover:shadow-tosca/30
+                    bg-linear-to-r from-tosca to-biru-tua shadow-md hover:shadow-lg hover:shadow-tosca/30
                     transition-all duration-300 hover:scale-[1.04] active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 ring-tosca"
                 >
                   <span>Pesan Wisata</span>
@@ -252,7 +254,7 @@ export default function Navbar() {
                   href="/pesan"
                   onClick={() => setMobileMenuOpen(false)}
                   tabIndex={mobileMenuOpen ? 0 : -1}
-                  className="w-full text-center px-4 py-2.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-tosca to-biru-tua shadow-xs active:scale-95 transition-transform focus-visible:outline-hidden focus-visible:ring-2 ring-tosca"
+                  className="w-full text-center px-4 py-2.5 rounded-full text-sm font-semibold text-white bg-linear-to-r from-tosca to-biru-tua shadow-xs active:scale-95 transition-transform focus-visible:outline-hidden focus-visible:ring-2 ring-tosca"
                 >
                   Pesan Wisata Sekarang
                 </Link>
@@ -270,8 +272,8 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Spacer: di halaman selain beranda, dorong konten ke bawah navbar */}
-      {!isHome && <div className="h-14 lg:h-16" aria-hidden />}
+      {/* Spacer: di halaman selain beranda & destinasi wisata, dorong konten ke bawah navbar */}
+      {!isHeroPage && <div className="h-14 lg:h-16" aria-hidden />}
     </>
   )
 }
