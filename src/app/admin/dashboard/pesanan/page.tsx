@@ -1,16 +1,12 @@
 'use client'
-
 import { useState, useEffect } from 'react'
 import {
   CheckCircle2,
   Clock,
   XCircle,
   Loader2,
-  User,
   Phone,
   Mail,
-  Calendar,
-  AlertCircle,
 } from 'lucide-react'
 
 interface DetailItem {
@@ -46,7 +42,35 @@ export default function AdminPesananPage() {
   const [updatingId, setUpdatingId] = useState<number | null>(null)
   const [alertMsg, setAlertMsg] = useState('')
 
-  const fetchPesanans = async () => {
+  // Memuat data saat filter (activeTab) berubah — langsung di dalam useEffect
+  useEffect(() => {
+    let ignore = false
+
+    const loadData = async () => {
+      try {
+        setLoading(true)
+        const url = activeTab === 'ALL' ? '/api/admin/pesanan' : `/api/admin/pesanan?status=${activeTab}`
+        const res = await fetch(url)
+        const data = await res.json()
+        if (!ignore && data.success) {
+          setPesanans(data.data)
+        }
+      } catch (err) {
+        if (!ignore) console.error(err)
+      } finally {
+        if (!ignore) setLoading(false)
+      }
+    }
+
+    loadData()
+
+    return () => {
+      ignore = true
+    }
+  }, [activeTab]) // ✅ Hanya bergantung pada nilai filter — aman dan jelas
+
+  // Fungsi untuk menyegarkan data setelah mengubah status
+  const refreshData = async () => {
     try {
       setLoading(true)
       const url = activeTab === 'ALL' ? '/api/admin/pesanan' : `/api/admin/pesanan?status=${activeTab}`
@@ -62,10 +86,6 @@ export default function AdminPesananPage() {
     }
   }
 
-  useEffect(() => {
-    fetchPesanans()
-  }, [activeTab])
-
   const handleUpdateStatus = async (id: number, status: 'CONFIRMED' | 'CANCELLED') => {
     try {
       setUpdatingId(id)
@@ -76,11 +96,14 @@ export default function AdminPesananPage() {
       })
       const data = await res.json()
       if (data.success) {
+        // Perbarui lokal terlebih dahulu agar responsif
         setPesanans((prev) =>
           prev.map((p) => (p.id === id ? { ...p, status } : p))
         )
         setAlertMsg(`Pesanan berhasil diubah menjadi ${status}`)
         setTimeout(() => setAlertMsg(''), 4000)
+        // Lalu segarkan daftar dari server
+        await refreshData()
       } else {
         alert(data.message || 'Gagal mengubah status.')
       }

@@ -1,11 +1,9 @@
 'use client'
-
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import {
   Plus,
   Trash2,
-  MapPin,
-  Clock,
   Sparkles,
   Loader2,
   X,
@@ -59,7 +57,8 @@ export default function AdminDestinasiPage() {
   const [isPopuler, setIsPopuler] = useState(false)
   const [deskripsi, setDeskripsi] = useState('')
 
-  const fetchData = async () => {
+  // Fungsi untuk menyegarkan data setelah operasi tambah/hapus
+  const refreshData = async () => {
     try {
       setLoading(true)
       const [resDest, resKat] = await Promise.all([
@@ -72,9 +71,6 @@ export default function AdminDestinasiPage() {
       if (dataDest.success) setDestinasis(dataDest.data)
       if (dataKat.success) {
         setCategories(dataKat.data)
-        if (dataKat.data.length > 0 && !kategoriId) {
-          setKategoriId(String(dataKat.data[0].id))
-        }
       }
     } catch (err) {
       console.error(err)
@@ -83,9 +79,43 @@ export default function AdminDestinasiPage() {
     }
   }
 
+  // Memuat data awal saat komponen pertama kali tampil
   useEffect(() => {
-    fetchData()
-  }, [])
+    let ignore = false
+
+    const loadData = async () => {
+      try {
+        setLoading(true)
+        const [resDest, resKat] = await Promise.all([
+          fetch('/api/admin/destinasi'),
+          fetch('/api/kategori'),
+        ])
+        const dataDest = await resDest.json()
+        const dataKat = await resKat.json()
+
+        if (!ignore) {
+          if (dataDest.success) setDestinasis(dataDest.data)
+          if (dataKat.success) {
+            setCategories(dataKat.data)
+            // Atur kategori default hanya jika belum ada yang dipilih
+            if (dataKat.data.length > 0) {
+              setKategoriId((prev) => prev || String(dataKat.data[0].id))
+            }
+          }
+        }
+      } catch (err) {
+        if (!ignore) console.error(err)
+      } finally {
+        if (!ignore) setLoading(false)
+      }
+    }
+
+    loadData()
+
+    return () => {
+      ignore = true
+    }
+  }, []) // ✅ Kosong — tidak ada dependensi, berjalan sekali saja
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -118,6 +148,7 @@ export default function AdminDestinasiPage() {
 
       setSuccessMsg('Destinasi baru berhasil ditambahkan!')
       setIsModalOpen(false)
+
       // Reset form
       setNama('')
       setHargaTiket('')
@@ -125,8 +156,10 @@ export default function AdminDestinasiPage() {
       setAlamat('')
       setFotoUrl('')
       setIsPopuler(false)
-      // Refresh list
-      fetchData()
+      // Jangan reset kategoriId agar tetap nyaman untuk entri berikutnya
+
+      // Segarkan daftar
+      await refreshData()
     } catch (err: unknown) {
       if (err instanceof Error) {
         setErrorMsg(err.message)
@@ -159,6 +192,8 @@ export default function AdminDestinasiPage() {
     }
   }
 
+  const defaultImage = 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=100&q=80'
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -171,7 +206,6 @@ export default function AdminDestinasiPage() {
             Tambah, edit, dan kelola lokasi wisata Magelang yang tampil di website.
           </p>
         </div>
-
         <button
           onClick={() => setIsModalOpen(true)}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-emerald-600/30 transition-all hover:scale-105 shrink-0"
@@ -214,11 +248,16 @@ export default function AdminDestinasiPage() {
                 destinasis.map((dest) => (
                   <tr key={dest.id} className="hover:bg-gray-50/80 transition-colors">
                     <td className="py-4 px-6 flex items-center gap-3">
-                      <img
-                        src={dest.fotoUrl || 'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=100&q=80'}
-                        alt={dest.nama}
-                        className="w-12 h-12 rounded-xl object-cover bg-gray-100 shrink-0"
-                      />
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-gray-100 shrink-0 relative">
+                        <Image
+                          src={dest.fotoUrl || defaultImage}
+                          alt={dest.nama}
+                          fill
+                          sizes="48px"
+                          className="object-cover"
+                          unoptimized
+                        />
+                      </div>
                       <div>
                         <span className="font-bold text-gray-900 block">{dest.nama}</span>
                         {dest.isPopuler && (
