@@ -129,7 +129,7 @@ export default async function CekPesananPage({
         {pesanan && (
           <div className="bg-white rounded-3xl border border-gray-100 shadow-xl overflow-hidden">
             {/* Header Invoice */}
-            <div className="bg-gradient-to-r from-emerald-900 to-teal-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="bg-linear-to-r from-emerald-900 to-teal-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <span className="text-xs font-semibold text-emerald-300 uppercase tracking-wider block">
                   Bukti Pesanan Wisata
