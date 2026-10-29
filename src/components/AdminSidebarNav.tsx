@@ -2,7 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
-import { LayoutDashboard, MapPin, ClipboardList, LogOut } from 'lucide-react'
+import {
+  LayoutDashboard,
+  MapPin,
+  Tags,
+  ConciergeBell,
+  ClipboardList,
+  LogOut,
+} from 'lucide-react'
 
 export default function AdminSidebarNav() {
   const pathname = usePathname()
@@ -19,6 +26,18 @@ export default function AdminSidebarNav() {
       name: 'Kelola Destinasi',
       href: '/admin/dashboard/destinasi',
       icon: MapPin,
+      exact: false,
+    },
+    {
+      name: 'Kelola Kategori',
+      href: '/admin/dashboard/kategori',
+      icon: Tags,
+      exact: false,
+    },
+    {
+      name: 'Kelola Layanan',
+      href: '/admin/dashboard/layanan',
+      icon: ConciergeBell,
       exact: false,
     },
     {
@@ -63,7 +82,7 @@ export default function AdminSidebarNav() {
 
       <button
         onClick={handleLogout}
-        className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors mt-6"
+        className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors mt-6 cursor-pointer"
       >
         <LogOut className="w-4 h-4 shrink-0" />
         <span>Keluar (Logout)</span>

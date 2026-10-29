@@ -80,6 +80,8 @@ export default function Navbar() {
       ? 'bg-black/15 backdrop-blur-md border-b border-white/15 shadow-none'
       : 'bg-white/45 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/40 shadow-[0_8px_30px_-12px_rgba(8,47,73,0.18)]'
 
+  if (pathname.startsWith('/admin')) return null
+
   return (
     <>
       <header
