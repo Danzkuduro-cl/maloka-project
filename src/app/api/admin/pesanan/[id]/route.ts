@@ -26,7 +26,10 @@ export async function PUT(
 
     const pesanan = await prisma.pesanan.update({
       where: { id: pesananId },
-      data: { status },
+      data: {
+        status,
+        adminId: session.id,
+      },
     })
 
     return NextResponse.json({

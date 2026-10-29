@@ -28,14 +28,21 @@ export async function PUT(
       data: {
         ...(nama ? { nama } : {}),
         ...(deskripsi ? { deskripsi } : {}),
-        ...(hargaTiket !== undefined ? { hargaTiket: parseFloat(hargaTiket) } : {}),
+        ...(hargaTiket !== undefined ? { hargaTiket: parseFloat(String(hargaTiket)) || 0 } : {}),
         ...(jamBuka ? { jamBuka } : {}),
         ...(jamTutup ? { jamTutup } : {}),
         ...(lokasi ? { lokasi } : {}),
-        ...(alamat !== undefined ? { alamat } : {}),
-        ...(fotoUrl !== undefined ? { fotoUrl } : {}),
+        ...(alamat !== undefined ? { alamat: alamat || null } : {}),
+        ...(fotoUrl !== undefined ? { fotoUrl: fotoUrl || null } : {}),
         ...(isPopuler !== undefined ? { isPopuler: Boolean(isPopuler) } : {}),
-        ...(kategoriId ? { kategoriId: parseInt(kategoriId) } : {}),
+        ...(kategoriId ? { kategoriId: parseInt(String(kategoriId)) } : {}),
+        adminId: session.id,
+      },
+      include: {
+        kategori: true,
+        admin: {
+          select: { id: true, nama: true, email: true },
+        },
       },
     })
 

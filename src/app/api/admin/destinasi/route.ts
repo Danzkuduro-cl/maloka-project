@@ -13,6 +13,9 @@ export async function GET() {
     const destinasis = await prisma.destinasi.findMany({
       include: {
         kategori: true,
+        admin: {
+          select: { id: true, nama: true, email: true },
+        },
         _count: { select: { layanans: true } },
       },
       orderBy: { id: 'desc' },
@@ -40,7 +43,7 @@ export async function POST(request: Request) {
     const { nama, deskripsi, hargaTiket, jamBuka, jamTutup, lokasi, alamat, fotoUrl, isPopuler, kategoriId } =
       body
 
-    if (!nama || !deskripsi || !hargaTiket || !jamBuka || !jamTutup || !lokasi || !kategoriId) {
+    if (!nama || !deskripsi || hargaTiket === undefined || hargaTiket === '' || !jamBuka || !jamTutup || !lokasi || !kategoriId) {
       return NextResponse.json(
         { success: false, message: 'Mohon isi semua field wajib.' },
         { status: 400 }
@@ -61,14 +64,21 @@ export async function POST(request: Request) {
         nama,
         slug,
         deskripsi,
-        hargaTiket: parseFloat(hargaTiket),
+        hargaTiket: parseFloat(String(hargaTiket)) || 0,
         jamBuka,
         jamTutup,
         lokasi,
         alamat: alamat || null,
         fotoUrl: fotoUrl || null,
         isPopuler: Boolean(isPopuler),
-        kategoriId: parseInt(kategoriId),
+        kategoriId: parseInt(String(kategoriId)),
+        adminId: session.id,
+      },
+      include: {
+        kategori: true,
+        admin: {
+          select: { id: true, nama: true, email: true },
+        },
       },
     })
 

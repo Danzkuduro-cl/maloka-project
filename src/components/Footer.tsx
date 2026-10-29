@@ -1,8 +1,13 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { MapPin, Phone, Mail } from 'lucide-react'
 
 export default function Footer() {
+  const pathname = usePathname()
+  if (pathname.startsWith('/admin')) return null
   return (
     <footer className="bg-biru-tua text-white/80 border-t border-biru-sangat-tua mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
