@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, CalendarCheck, Shield, ArrowRight } from 'lucide-react'
+import { Menu, X, CalendarCheck, ArrowRight } from 'lucide-react'
 
 const EASE = 'ease-[cubic-bezier(0.22,1,0.36,1)]'
 
@@ -152,7 +152,7 @@ export default function Navbar() {
               })}
             </nav>
 
-            {/* Action Buttons (Right) */}
+            {/* Action Buttons (Right) - Tombol Admin Desktop telah dihapus */}
             <div aria-hidden={!visible} className="hidden md:flex items-center space-x-3">
               <span
                 className={`transition-[opacity,transform,filter] duration-500 ${EASE} ${reveal}`}
@@ -167,25 +167,6 @@ export default function Navbar() {
                 >
                   <span>Pesan Wisata</span>
                   <ArrowRight className="h-4 w-0 -ml-1 opacity-0 group-hover/btn:w-4 group-hover/btn:ml-0 group-hover/btn:opacity-100 transition-all duration-300" />
-                </Link>
-              </span>
-
-              <span
-                className={`transition-[opacity,transform,filter] duration-500 ${EASE} ${reveal}`}
-                style={{ transitionDelay: visible ? '440ms' : '0ms' }}
-              >
-                <Link
-                  href="/admin/login"
-                  tabIndex={visible ? 0 : -1}
-                  className={`inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium rounded-lg transition-colors focus-visible:outline-hidden focus-visible:ring-2 ring-tosca ${
-                    onDark
-                      ? 'text-white/85 hover:text-white hover:bg-white/15'
-                      : 'text-teks-sekunder hover:text-biru-tua hover:bg-white/60'
-                  }`}
-                  title="Dashboard Pengelola"
-                >
-                  <Shield className={`w-3.5 h-3.5 ${onDark ? 'text-white' : 'text-tosca'}`} />
-                  <span>Admin</span>
                 </Link>
               </span>
             </div>
@@ -260,14 +241,7 @@ export default function Navbar() {
                 >
                   Pesan Wisata Sekarang
                 </Link>
-                <Link
-                  href="/admin/login"
-                  onClick={() => setMobileMenuOpen(false)}
-                  tabIndex={mobileMenuOpen ? 0 : -1}
-                  className="w-full text-center px-4 py-2 rounded-lg text-xs font-medium text-teks-sekunder hover:text-biru-tua hover:bg-white/50 transition-colors focus-visible:outline-hidden focus-visible:ring-2 ring-tosca"
-                >
-                  Login Admin
-                </Link>
+                {/* Tombol Login Admin Mobile telah dihapus */}
               </div>
             </div>
           </div>
