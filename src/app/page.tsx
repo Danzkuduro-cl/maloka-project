@@ -355,7 +355,7 @@ export default async function HomePage() {
       {/* =========================================================================
           4. DESTINASI POPULER SECTION (Coverflow)
       ========================================================================= */}
-      <section className="bg-white py-20 lg:py-28 overflow-hidden">
+      <section className="bg-white pt-20 sm:pt-28 pb-20 lg:pb-28 overflow-hidden isolate">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           {/* Eyebrow Script + Title */}
           <span className="font-script text-biru-tua text-2xl sm:text-3xl block mb-1">
