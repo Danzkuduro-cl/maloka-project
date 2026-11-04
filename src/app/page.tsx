@@ -129,7 +129,7 @@ export default async function HomePage() {
           2. HERO SECTION + SEARCH BOX + KATEGORI (Digabung agar background menyatu)
       ========================================================================= */}
       <div className="relative bg-biru-muda">
-        <section className="relative min-h-105 lg:min-h-125 flex items-center justify-start overflow-hidden pt-16 pb-20 lg:pb-24">
+        <section className="relative min-h-105 lg:min-h-125 flex items-center justify-start overflow-hidden pt-20 pb-24 lg:pt-24 lg:pb-32">
           {/* Background Full Width Photo */}
           <img
             src={heroImage}
@@ -137,51 +137,66 @@ export default async function HomePage() {
             className="absolute inset-0 w-full h-full object-cover"
           />
 
-          {/* Dark Overlay Gradient */}
-          <div className="absolute inset-0 bg-linear-to-r from-biru-tua/90 via-biru-tua/65 to-biru-tua/20" />
+          {/* Dark Overlay Gradient (Kembali ke versi aslimu) */}
+          <div className="absolute inset-0 bg-linear-to-r from-biru-tua/72 via-biru-tua/52 to-biru-tua/20" />
 
           {/* Hero Content Container */}
           <div className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 text-left z-10">
-            {/* Kontainer teks dengan jarak antar baris yang disesuaikan */}
-            <div className="max-w-2xl mt-8 sm:mt-12 lg:mt-16">
-              {/* Eyebrow Script (Diberi jarak bawah lebih lega ke judul utama) */}
-              <span className="font-script text-white text-xl sm:text-2xl lg:text-3xl mb-4 sm:mb-5 block drop-shadow-xs">
+            {/* Margin top sedikit disesuaikan agar konten seimbang di tengah */}
+            <div className="max-w-2xl mt-4 sm:mt-8 lg:mt-12">
+              {/* Eyebrow Script */}
+              <span 
+                className="font-script text-white text-xl sm:text-2xl lg:text-3xl mb-5 sm:mb-6 block"
+                style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 20px rgba(0, 0, 0, 0.85)' }}
+              >
                 Portal Resmi Informasi & Pemesanan Wisata Magelang
               </span>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.15]">
-                Eksplorasi Keajaiban{' '}
-                <span className="text-[#9BE3F5]">Magelang</span> Lebih Mudah &amp; Terencana
+              <h1 
+                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.04]"
+                style={{ textShadow: '0 3px 6px rgba(0, 0, 0, 0.95), 0 8px 30px rgba(0, 0, 0, 0.9)' }}
+              >
+                Temukan Keajaiban{' '}<span className="text-[#9BE3F5]">Magelang</span>
+                <br />
+                Bersama Maloka
               </h1>
 
-              {/* Description (Diberi jarak atas lebih lega dari judul utama) */}
-              <p className="mt-5 sm:mt-6 text-sm sm:text-base text-white/90 leading-relaxed max-w-xl">
+              {/* Description */}
+              <p 
+                className="mt-6 sm:mt-8 text-sm sm:text-base lg:text-lg text-white leading-relaxed max-w-xl"
+                style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 20px rgba(0, 0, 0, 0.85)' }}
+              >
                 Dari kemegahan Candi Borobudur hingga siluet sunrise Menoreh dan gardu pandang Merapi.
                 Pesan tiket, pemandu profesional, hingga transportasi wisata dalam satu platform.
               </p>
 
-              {/* Action Buttons (Diberi jarak atas lebih lega dari deskripsi) */}
-              <div className="mt-8 sm:mt-9 flex flex-wrap items-center gap-3.5">
+              {/* Action Buttons */}
+              <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
                 <Link
                   href="/wisata"
-                  className={`${BTN_BASE} ${BTN_MD} bg-tosca hover:bg-tosca-tua text-white shadow-md hover:shadow-lg hover:shadow-tosca/30`}
+                  className={`${BTN_BASE} ${BTN_MD} bg-tosca hover:bg-tosca-tua text-white shadow-[0_8px_25px_rgba(0,0,0,0.6)] hover:shadow-lg hover:shadow-tosca/40`}
                 >
-                  <span>Jelajahi Destinasi</span>
+                  <span style={{ textShadow: '0 2px 6px rgba(0, 0, 0, 0.95)' }}>
+                    Jelajahi Destinasi
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
 
                 <Link
                   href="#layanan"
-                  className={`${BTN_BASE} ${BTN_MD} border-2 border-white text-white hover:bg-white hover:text-biru-tua shadow-md hover:shadow-lg hover:shadow-white/20`}
+                  className={`${BTN_BASE} ${BTN_MD} border-2 border-white text-white hover:bg-white hover:text-biru-tua shadow-[0_8px_25px_rgba(0,0,0,0.6)] hover:shadow-lg hover:shadow-white/20`}
                 >
-                  <span>Layanan Kami</span>
+                  <span style={{ textShadow: '0 2px 6px rgba(0, 0, 0, 0.95)' }}>
+                    Layanan Kami
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
               </div>
             </div>
           </div>
         </section>
+
 
         {/* Floating Search Box (Menimpa batas bawah hero dan area biru muda) */}
         <div className="relative -mt-7 sm:-mt-8 z-20 max-w-4xl mx-auto px-4 sm:px-6 pb-12 lg:pb-16">
@@ -205,10 +220,14 @@ export default async function HomePage() {
             {/* Tombol */}
             <button
               type="submit"
-              className={`${BTN_BASE} h-11 px-5 sm:px-7 text-sm text-white bg-linear-to-r from-tosca to-biru-tua shadow-md hover:shadow-lg hover:shadow-tosca/30`}
+              className={`${BTN_BASE} h-11 px-5 sm:px-7 text-sm text-white bg-linear-to-r from-tosca to-biru-tua shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-lg hover:shadow-tosca/30`}
             >
-              <span className="hidden sm:inline">Cari Wisata</span>
-              <span className="sm:hidden">Cari</span>
+              <span className="hidden sm:inline" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9)' }}>
+                Cari Wisata
+              </span>
+              <span className="sm:hidden" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9)' }}>
+                Cari
+              </span>
               <ArrowRight className={BTN_ARROW} />
             </button>
           </form>
@@ -261,7 +280,7 @@ export default async function HomePage() {
                   >
                     {/* Visual Card: Gaya Ikon Maloka persis Kuliner/Religi */}
                     <div className="w-full aspect-4/3 rounded-2xl overflow-hidden shadow-md group-hover:shadow-xl transition-all duration-300 relative bg-linear-to-tr from-biru-tua to-tosca flex flex-col items-center justify-center p-3 text-white">
-                      <IconComponent className="w-10 h-10 text-white/95 mb-1 stroke-[1.8] group-hover:scale-110 transition-transform duration-300" />
+                      <IconComponent className="w-15 h-15 text-white/95 mb-1 stroke-[1.8] group-hover:scale-110 transition-transform duration-300" />
                       <span className="text-[11px] font-semibold text-white/80 tracking-wide">
                         Maloka
                       </span>
@@ -322,9 +341,11 @@ export default async function HomePage() {
           <div className="mt-6 sm:mt-8">
             <Link
               href="/wisata"
-              className={`${BTN_BASE} ${BTN_MD} border border-tosca text-tosca hover:bg-tosca hover:text-white shadow-sm hover:shadow-lg hover:shadow-tosca/30`}
+              className={`${BTN_BASE} ${BTN_MD} border border-tosca text-tosca hover:bg-tosca hover:text-white shadow-[0_6px_14px_rgba(26,163,198,0.3)] hover:shadow-lg hover:shadow-tosca/30`}
             >
-              <span>Lihat Semua Destinasi</span>
+              <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>
+                Lihat Semua Destinasi
+              </span>
               <ArrowRight className={BTN_ARROW} />
             </Link>
           </div>
@@ -357,9 +378,11 @@ export default async function HomePage() {
         <div className="text-center mt-10 sm:mt-12">
           <Link
             href="/wisata"
-            className={`${BTN_BASE} ${BTN_MD} bg-biru-tua hover:bg-biru-sangat-tua text-white shadow-md hover:shadow-lg hover:shadow-biru-tua/30`}
+            className={`${BTN_BASE} ${BTN_MD} bg-biru-tua hover:bg-biru-sangat-tua text-white shadow-[0_8px_25px_rgba(14,59,76,0.6)] hover:shadow-lg hover:shadow-biru-tua/30`}
           >
-            <span>Jelajahi Lebih Banyak Tempat Wisata</span>
+            <span style={{ textShadow: '0 2px 5px rgba(0, 0, 0, 0.9)' }}>
+              Jelajahi Lebih Banyak Tempat Wisata
+            </span>
             <ArrowRight className={BTN_ARROW} />
           </Link>
         </div>
@@ -409,7 +432,10 @@ export default async function HomePage() {
                     </p>
                   </div>
 
-                  <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-tosca group-hover:gap-1.5 transition-all">
+                  <span 
+                    className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-tosca group-hover:gap-1.5 transition-all"
+                    style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.25)' }}
+                  >
                     {item.cta}
                     <ArrowRight className="w-3 h-3" />
                   </span>
@@ -477,16 +503,20 @@ export default async function HomePage() {
               <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
                 <Link
                   href="/pesan"
-                  className={`${BTN_BASE} ${BTN_MD} bg-biru-tua hover:bg-biru-sangat-tua text-white shadow-md hover:shadow-lg hover:shadow-biru-tua/30`}
+                  className={`${BTN_BASE} ${BTN_MD} bg-biru-tua hover:bg-biru-sangat-tua text-white shadow-[0_8px_25px_rgba(14,59,76,0.6)] hover:shadow-lg hover:shadow-biru-tua/30`}
                 >
-                  <span>Mulai Pemesanan Sekarang</span>
+                  <span style={{ textShadow: '0 2px 5px rgba(0, 0, 0, 0.9)' }}>
+                    Mulai Pemesanan Sekarang
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
                 <Link
                   href="/cek-pesanan"
-                  className={`${BTN_BASE} ${BTN_MD} border-2 border-biru-tua text-biru-tua hover:bg-biru-muda shadow-sm hover:shadow-lg hover:shadow-biru-tua/20`}
+                  className={`${BTN_BASE} ${BTN_MD} border-2 border-biru-tua text-biru-tua hover:bg-biru-muda shadow-[0_6px_20px_rgba(14,59,76,0.35)] hover:shadow-lg hover:shadow-biru-tua/20`}
                 >
-                  <span>Cek Status Pesanan</span>
+                  <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>
+                    Cek Status Pesanan
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
               </div>

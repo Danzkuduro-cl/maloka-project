@@ -187,11 +187,11 @@ export default function DestinasiShowcase({ items }: DestinasiShowcaseProps) {
             let opacity = 1
             let zIndex = 30
             if (isCenter) {
-              scale = 1
+              scale = 1.02
               opacity = 1
-              zIndex = 40
+              zIndex = 50
             } else if (Math.abs(offset) === 1) {
-              scale = 0.86
+              scale = 0.85
               opacity = 1
               zIndex = 20
             } else if (Math.abs(offset) === 2) {
@@ -210,7 +210,7 @@ export default function DestinasiShowcase({ items }: DestinasiShowcaseProps) {
                 : `Rp ${item.hargaTiket.toLocaleString('id-ID')}`
 
             const cardWidthClass = isCenter ? 'w-[340px] lg:w-[380px]' : 'w-[400px] lg:w-[350px]'
-            const cardHeightClass = isCenter ? 'h-[440px] lg:h-[460px]' : 'h-[410px] lg:h-[490px]'
+            const cardHeightClass = isCenter ? 'h-[440px] lg:h-[470px]' : 'h-[410px] lg:h-[490px]'
 
             return (
               <div
@@ -247,9 +247,9 @@ export default function DestinasiShowcase({ items }: DestinasiShowcaseProps) {
                 <div className="absolute inset-0 bg-linear-to-t from-biru-sangat-tua/95 via-biru-tua/40 to-transparent pointer-events-none" />
 
                 {/* Badge Atas */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                <div className="absolute top-5 left-5 right-5 flex items-center justify-between pointer-events-none">
                   {item.kategoriNama ? (
-                    <span className="px-3.5 py-1 text-xs font-semibold rounded-full bg-white/20 backdrop-blur-md text-white border border-white/25">
+                    <span className="px-3.5 py-1.5 text-xs font-semibold rounded-full bg-gray-700/80 backdrop-blur-md text-white border border-white/15 shadow-xs">
                       {item.kategoriNama}
                     </span>
                   ) : (
