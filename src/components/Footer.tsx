@@ -146,7 +146,7 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-white/60 gap-4">
           <p>© {new Date().getFullYear()} Maloka Magelang. Hak Cipta Dilindungi.</p>
           <p className="flex items-center gap-1">
-            Dibuat untuk Tugas Pemrograman Web Framework — Kelompok 2
+            Dibuat untuk Tugas Pemrograman Web Framework
           </p>
         </div>
       </div>

@@ -284,11 +284,13 @@ export default function DestinasiShowcase({ items }: DestinasiShowcaseProps) {
                     {isCenter ? (
                       <Link
                         href={`/wisata/${item.id}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-tosca hover:bg-tosca-tua px-5 py-2.5 rounded-full transition-all shadow-md hover:scale-105 active:scale-95"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-tosca hover:bg-tosca-tua px-5 py-2.5 rounded-full transition-all shadow-[0_6px_20px_rgba(0,0,0,0.35)] hover:shadow-lg hover:shadow-tosca/30 hover:scale-105 active:scale-95"
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span>Detail</span>
+                        <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.25)' }}>
+                          Detail
+                        </span>
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                     ) : (
@@ -419,11 +421,13 @@ export default function DestinasiShowcase({ items }: DestinasiShowcaseProps) {
                     {isCenter && (
                       <Link
                         href={`/wisata/${item.id}`}
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-white bg-tosca px-4 py-2 rounded-full"
+                        className="inline-flex items-center gap-1 text-xs font-semibold text-white bg-tosca px-4 py-2 rounded-full shadow-[0_6px_20px_rgba(0,0,0,0.35)] hover:shadow-lg hover:shadow-tosca/30"
                         onPointerDown={(e) => e.stopPropagation()}
                         onClick={(e) => e.stopPropagation()}
                       >
-                        <span>Detail</span>
+                        <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.25)' }}>
+                          Detail
+                        </span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </Link>
                     )}

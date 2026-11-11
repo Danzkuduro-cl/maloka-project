@@ -118,27 +118,33 @@ export default async function WisataPage({
         <div className="absolute inset-0 bg-linear-to-b from-biru-tua/75 via-biru-tua/60 to-biru-tua/80" />
 
         <div className="relative max-w-5xl w-full mx-auto px-4 sm:px-6 z-10 flex flex-col items-center">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
+          <h1 
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight"
+            style={{ textShadow: '0 3px 6px rgba(0, 0, 0, 0.95), 0 8px 30px rgba(0, 0, 0, 0.9)' }}
+          >
             Eksplorasi Destinasi{' '}
             <span className="text-[#9BE3F5]">Magelang</span>
           </h1>
-          <p className="mt-4 text-sm sm:text-base text-white/80 max-w-2xl">
+          <p 
+            className="mt-4 text-sm sm:text-base text-white/80 max-w-2xl"
+            style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9), 0 6px 20px rgba(0, 0, 0, 0.85)' }}
+          >
             Temukan tempat wisata terbaik di Magelang, mulai dari candi bersejarah, pegunungan, hingga kuliner khas.
           </p>
 
-          {/* KATEGORI — Diperbaiki agar ikon tidak terpotong di HP */}
+          {/* KATEGORI */}
           <div className="mt-8 w-full overflow-x-auto pb-3">
             <div className="flex items-center justify-start sm:justify-center gap-2 sm:gap-3 flex-nowrap">
               <Link
                 href={search ? `/wisata?search=${search}` : '/wisata'}
                 className={`flex flex-col items-center gap-1 px-3 sm:px-4 py-3 rounded-xl transition-all whitespace-nowrap shrink-0 ${
                   !kategori
-                    ? 'bg-white/15 text-white font-semibold border border-white/25'
+                    ? 'bg-white/15 text-white font-semibold border border-white/25 shadow-md'
                     : 'bg-transparent text-white/70 hover:bg-white/10 hover:text-white border border-transparent'
                 }`}
               >
                 <Compass className="w-5 h-5" />
-                <span className="text-xs mt-0.5">Semua</span>
+                <span className="text-xs mt-0.5" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)' }}>Semua</span>
               </Link>
               {categories.map((kat) => {
                 const isActive = kategori === kat.slug
@@ -152,12 +158,12 @@ export default async function WisataPage({
                     href={href}
                     className={`flex flex-col items-center gap-1 px-3 sm:px-4 py-3 rounded-xl transition-all whitespace-nowrap shrink-0 ${
                       isActive
-                        ? 'bg-white/15 text-white font-semibold border border-white/25'
+                        ? 'bg-white/15 text-white font-semibold border border-white/25 shadow-md'
                         : 'bg-transparent text-white/70 hover:bg-white/10 hover:text-white border border-transparent'
                     }`}
                   >
                     <IconComponent className="w-5 h-5" />
-                    <span className="text-xs mt-0.5">{kat.nama}</span>
+                    <span className="text-xs mt-0.5" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.8)' }}>{kat.nama}</span>
                   </Link>
                 )
               })}
@@ -167,31 +173,33 @@ export default async function WisataPage({
           {/* SEARCH BAR */}
           <div className="mt-6 w-full max-w-3xl">
             <form
-            action="/wisata"
-            method="GET"
-            className="group flex items-center gap-1.5 p-1.5 rounded-2xl bg-white border border-tosca/70 shadow-xl shadow-biru-tua/10
+              action="/wisata"
+              method="GET"
+              className="group flex items-center gap-1.5 p-1.5 rounded-2xl bg-white border border-tosca/70 shadow-xl shadow-biru-tua/10
               transition-all duration-300 focus-within:border-tosca focus-within:shadow-2xl focus-within:shadow-tosca/20 focus-within:ring-4 focus-within:ring-tosca/10"
-          >
-            <label className="flex items-center gap-3 flex-1 min-w-0 h-11 pl-3.5 pr-2 cursor-text">
-              <Search className="w-5 h-5 text-tosca shrink-0" />
-              <input
-                type="text"
-                name="search"
-                defaultValue={search || ''}
-                placeholder="Cari destinasi, lokasi, atraksi wisata..."
-                className="w-full h-full text-sm font-medium bg-transparent focus:outline-hidden placeholder:text-gray-400 text-gray-800 truncate"
-              />
-              {kategori && <input type="hidden" name="kategori" value={kategori} />}
-            </label>
-
-            <button
-              type="submit"
-              className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua text-white shadow-md hover:shadow-lg hover:shadow-tosca/30 hidden sm:flex`}
             >
-              Cari Wisata
-              <ArrowRight className={BTN_ARROW} />
-            </button>
-          </form>
+              <label className="flex items-center gap-3 flex-1 min-w-0 h-11 pl-3.5 pr-2 cursor-text">
+                <Search className="w-5 h-5 text-tosca shrink-0" />
+                <input
+                  type="text"
+                  name="search"
+                  defaultValue={search || ''}
+                  placeholder="Cari destinasi, lokasi, atraksi wisata..."
+                  className="w-full h-full text-sm font-medium bg-transparent focus:outline-hidden placeholder:text-gray-400 text-gray-800 truncate"
+                />
+                {kategori && <input type="hidden" name="kategori" value={kategori} />}
+              </label>
+
+              <button
+                type="submit"
+                className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua text-white shadow-[0_6px_20px_rgba(0,0,0,0.45)] hover:shadow-lg hover:shadow-tosca/30 hidden sm:flex`}
+              >
+                <span style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.9)' }}>
+                  Cari Wisata
+                </span>
+                <ArrowRight className={BTN_ARROW} />
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -206,9 +214,9 @@ export default async function WisataPage({
             <Link
               key={item.id}
               href={`/wisata/${item.id}`}
-              className="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-100 hover:shadow-md transition-all group"
+              className="flex items-center gap-3 p-3 rounded-xl bg-white border border-gray-100 shadow-xs hover:shadow-md transition-all group"
             >
-              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden shrink-0">
+              <div className="relative w-10 h-10 sm:w-12 sm:h-12 rounded-lg overflow-hidden shrink-0 shadow-sm">
                 <Image
                   src={item.fotoUrl || featuredDestinations[0].fotoUrl}
                   alt={item.nama}
@@ -242,9 +250,11 @@ export default async function WisataPage({
           </div>
           <Link
             href="/wisata"
-            className={`${BTN_BASE} h-9 px-5 text-xs text-tosca-tua border border-tosca/50 hover:bg-tosca hover:text-white shadow-2xs hover:shadow-sm`}
+            className={`${BTN_BASE} h-9 px-5 text-xs text-tosca-tua border border-tosca/50 hover:bg-tosca hover:text-white shadow-[0_6px_14px_rgba(26,163,198,0.3)] hover:shadow-lg hover:shadow-tosca/30`}
           >
-            <span>{search || kategori ? 'Reset' : 'Lihat Semua'}</span>
+            <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>
+              {search || kategori ? 'Reset' : 'Lihat Semua'}
+            </span>
             <ArrowRight className={BTN_ARROW} />
           </Link>
         </div>
@@ -272,72 +282,78 @@ export default async function WisataPage({
           </div>
           <Link
             href="/paket"
-            className={`${BTN_BASE} ${BTN_MD} border border-tosca text-tosca hover:bg-tosca hover:text-white w-full sm:w-auto justify-center`}
+            className={`${BTN_BASE} ${BTN_MD} border border-tosca text-tosca hover:bg-tosca hover:text-white w-full sm:w-auto justify-center shadow-[0_6px_14px_rgba(26,163,198,0.3)] hover:shadow-lg hover:shadow-tosca/30`}
           >
-            Lihat Semua Paket
+            <span style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)' }}>
+              Lihat Semua Paket
+            </span>
             <ArrowRight className={BTN_ARROW} />
           </Link>
         </div>
 
-        <div className="rounded-3xl bg-linear-to-br from-tosca-tua via-[#0D728C] to-biru-tua p-5 sm:p-7 md:p-10 text-white overflow-hidden relative">
-          {/* Badge Harga — tidak menabrak teks di HP */}
-          <div className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-white/15 backdrop-blur-sm rounded-2xl px-3 sm:px-4 py-2 sm:py-3 text-right border border-white/15 z-20">
-            <span className="text-xs font-medium text-white/70 block">Mulai Dari</span>
-            <span className="text-xl sm:text-3xl font-bold text-[#9BE3F5]">Rp 50.000</span>
+        <div className="rounded-3xl bg-linear-to-br from-tosca-tua via-[#0D728C] to-biru-tua p-5 sm:p-7 md:p-10 text-white overflow-hidden relative shadow-xl">
+          {/* Badge Harga */}
+          <div className="absolute top-4 sm:top-6 right-4 sm:right-6 bg-white/15 backdrop-blur-sm rounded-2xl px-3 sm:px-4 py-2 sm:py-3 text-right border border-white/15 z-20 shadow-[0_8px_25px_rgba(0,0,0,0.2)]">
+            <span className="text-xs font-medium text-white/70 block" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)' }}>Mulai Dari</span>
+            <span className="text-xl sm:text-3xl font-bold text-[#9BE3F5]" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)' }}>Rp 50.000</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 pt-14 sm:pt-16">
             <div className="max-w-md">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold leading-tight" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.6)' }}>
                 Jelajahi Magelang Lebih Mudah
               </h3>
-              <p className="mt-3 text-sm sm:text-base text-white/80">
+              <p className="mt-3 text-sm sm:text-base text-white/80" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.5)' }}>
                 Semua kebutuhan liburan dalam satu paket lengkap, siap menemani perjalananmu.
               </p>
 
               <div className="mt-5 sm:mt-8 space-y-3 sm:space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0 shadow-sm">
                     <Calendar className="w-4.5 h-4.5 text-[#9BE3F5]" />
                   </div>
-                  <span className="text-sm sm:text-base">Tiket masuk destinasi populer</span>
+                  <span className="text-sm sm:text-base" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.4)' }}>Tiket masuk destinasi populer</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0 shadow-sm">
                     <Users className="w-4.5 h-4.5 text-[#9BE3F5]" />
                   </div>
-                  <span className="text-sm sm:text-base">Pemandu wisata berpengalaman</span>
+                  <span className="text-sm sm:text-base" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.4)' }}>Pemandu wisata berpengalaman</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center shrink-0 shadow-sm">
                     <Car className="w-4.5 h-4.5 text-[#9BE3F5]" />
                   </div>
-                  <span className="text-sm sm:text-base">Tur jeep sunrise Borobudur</span>
+                  <span className="text-sm sm:text-base" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.4)' }}>Tur jeep sunrise Borobudur</span>
                 </div>
               </div>
 
               <div className="mt-6 sm:mt-9 flex flex-col sm:flex-row gap-3">
                 <Link
                   href="/pesan"
-                  className={`${BTN_BASE} ${BTN_LG} bg-white text-biru-tua hover:bg-white/95 shadow-lg w-full sm:w-auto`}
+                  className={`${BTN_BASE} ${BTN_LG} bg-white text-biru-tua hover:bg-white/95 w-full sm:w-auto shadow-[0_8px_25px_rgba(0,0,0,0.3)] hover:shadow-xl hover:shadow-white/30`}
                 >
-                  Pesan Sekarang
+                  <span style={{ textShadow: '0 1px 2px rgba(255, 255, 255, 0.8)' }}>
+                    Pesan Sekarang
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
                 <Link
                   href="/pesan"
-                  className={`${BTN_BASE} ${BTN_LG} bg-white/10 border border-white/20 text-white hover:bg-white/20 w-full sm:w-auto`}
+                  className={`${BTN_BASE} ${BTN_LG} bg-white/10 border border-white/20 text-white hover:bg-white/20 w-full sm:w-auto shadow-[0_8px_25px_rgba(0,0,0,0.4)] hover:shadow-lg hover:shadow-white/20`}
                 >
-                  Lihat Detail
+                  <span style={{ textShadow: '0 2px 6px rgba(0, 0, 0, 0.95)' }}>
+                    Lihat Detail
+                  </span>
                   <ArrowRight className={BTN_ARROW} />
                 </Link>
               </div>
             </div>
 
-            {/* Gambar — di HP turun ke bawah, tidak tumpang tindih */}
+            {/* Gambar */}
             <div className="mt-6 lg:mt-16 grid grid-cols-2 gap-3 sm:gap-4">
               {featuredDestinations.map((item, i) => (
-                <div key={i} className="relative aspect-video rounded-2xl overflow-hidden group shadow-md">
+                <div key={i} className="relative aspect-video rounded-2xl overflow-hidden group shadow-lg">
                   <Image
                     src={item.fotoUrl}
                     alt={item.nama}
@@ -346,10 +362,10 @@ export default async function WisataPage({
                     sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                     unoptimized
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
-                  <div className="absolute bottom-3 left-3">
-                    <p className="text-sm font-bold text-white">{item.nama}</p>
-                    <p className="text-xs text-white/75 mt-0.5">{item.lokasi}</p>
+                  <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+                  <div className="absolute bottom-3 left-3 z-10">
+                    <p className="text-sm font-bold text-white" style={{ textShadow: '0 1px 3px rgba(0, 0, 0, 0.9)' }}>{item.nama}</p>
+                    <p className="text-xs text-white/80 mt-0.5" style={{ textShadow: '0 1px 2px rgba(0, 0, 0, 0.9)' }}>{item.lokasi}</p>
                   </div>
                 </div>
               ))}
