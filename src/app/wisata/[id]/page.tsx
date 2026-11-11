@@ -16,7 +16,9 @@ import {
 // Gaya tombol bersama landing page Maloka
 const BTN_BASE =
   'group/btn inline-flex items-center justify-center gap-1.5 font-semibold rounded-full shrink-0 cursor-pointer transition-all duration-300 hover:scale-[1.04] active:scale-95 focus-visible:outline-hidden focus-visible:ring-2 ring-tosca'
+
 const BTN_MD = 'h-11 px-7 text-sm'
+
 const BTN_ARROW =
   'h-4 w-0 -ml-1 opacity-0 group-hover/btn:w-4 group-hover/btn:ml-0 group-hover/btn:opacity-100 transition-all duration-300'
 
@@ -90,7 +92,7 @@ const DESTINATION_COMPANION_PHOTOS: CompanionPhotoConfig[] = [
   },
 ]
 
-// Fungsi resolver untuk menentukan foto pendamping yang 100% relevan dengan destinasi yang dibuka
+// Fungsi resolver untuk menentukan foto pendamping yang relevan dengan destinasi yang dibuka
 function getCompanionImage(destinasi: {
   id?: number
   nama: string
@@ -101,7 +103,10 @@ function getCompanionImage(destinasi: {
 }): string {
   // 1. Cek kecocokan langsung berdasarkan ID destinasi
   if (destinasi.id) {
-    const byId = DESTINATION_COMPANION_PHOTOS.find((item) => item.id === destinasi.id)
+    const byId = DESTINATION_COMPANION_PHOTOS.find(
+      (item) => item.id === destinasi.id
+    )
+
     if (byId) {
       return byId.companionUrl
     }
@@ -125,20 +130,25 @@ function getCompanionImage(destinasi: {
     }
   }
 
-  // 3. Fallback jika ada destinasi kustom: gunakan foto alternatif yang sesuai dengan kategori destinasi
+  // 3. Fallback jika ada destinasi kustom
   const katSlug = destinasi.kategori?.slug?.toLowerCase() || ''
+
   if (katSlug.includes('alam')) {
     return 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80'
   }
+
   if (katSlug.includes('budaya') || katSlug.includes('sejarah')) {
     return 'https://images.unsplash.com/photo-1566559532224-6d65e9fc0f37?auto=format&fit=crop&w=1200&q=80'
   }
+
   if (katSlug.includes('kuliner')) {
     return 'https://images.unsplash.com/photo-1645696329525-8ec3bee460a9?auto=format&fit=crop&w=1200&q=80'
   }
+
   if (katSlug.includes('edukasi') || katSlug.includes('rekreasi')) {
     return 'https://images.unsplash.com/photo-1578754068182-91ea7ae12471?auto=format&fit=crop&w=1200&q=80'
   }
+
   if (katSlug.includes('religi')) {
     return 'https://images.unsplash.com/photo-1781002624717-b6a057de42c1?auto=format&fit=crop&w=1200&q=80'
   }
@@ -158,6 +168,7 @@ export default async function DestinasiDetailPage({
 }) {
   const { id } = await params
   const destinasiId = parseInt(id)
+
   if (isNaN(destinasiId)) {
     notFound()
   }
@@ -186,7 +197,7 @@ export default async function DestinasiDetailPage({
     destinasi.fotoUrl ||
     'https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&w=1600&q=80'
 
-  // Gambar pendamping di bawah hero (disesuaikan dinamis & akurat dengan destinasi yang dibuka)
+  // Gambar pendamping di bawah hero
   const companionFotoUrl = getCompanionImage(destinasi)
 
   // Ambil destinasi terkait untuk rekomendasi
@@ -204,7 +215,11 @@ export default async function DestinasiDetailPage({
 
   // Jika destinasi sekategori kurang dari 4, lengkapi dengan destinasi populer lainnya
   if (rekomendasiDestinasi.length < 4) {
-    const excludeIds = [destinasi.id, ...rekomendasiDestinasi.map((d) => d.id)]
+    const excludeIds = [
+      destinasi.id,
+      ...rekomendasiDestinasi.map((d) => d.id),
+    ]
+
     const additional = await prisma.destinasi.findMany({
       where: {
         id: { notIn: excludeIds },
@@ -215,6 +230,7 @@ export default async function DestinasiDetailPage({
         kategori: { select: { id: true, nama: true, slug: true } },
       },
     })
+
     rekomendasiDestinasi = [...rekomendasiDestinasi, ...additional]
   }
 
@@ -243,15 +259,20 @@ export default async function DestinasiDetailPage({
             unoptimized
           />
 
-          {/* Overlay Gelap Khas Maloka untuk Kontras Teks Judul (ikut memudar secara alami bersama gambar) */}
+          {/* Overlay Gelap Khas Maloka */}
           <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 via-50% to-black/40" />
         </div>
 
         {/* Konten Hero: Judul, Badges & Metadata */}
         <div className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-16 sm:pb-20 lg:pb-24 z-20">
-
           {/* Nama Destinasi Utama */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-md max-w-4xl">
+          <h1
+            className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-md max-w-4xl"
+            style={{
+              textShadow:
+                '0 3px 6px rgba(0, 0, 0, 0.95), 0 8px 30px rgba(0, 0, 0, 0.9)',
+            }}
+          >
             {destinasi.nama}
           </h1>
         </div>
@@ -267,7 +288,13 @@ export default async function DestinasiDetailPage({
             <span className="text-xs font-bold uppercase tracking-wider text-tosca block mb-1">
               DESKRIPSI DESTINASI
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-5">
+
+            <h2
+              className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight mb-5"
+              style={{
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+              }}
+            >
               Tentang {destinasi.nama}
             </h2>
 
@@ -283,10 +310,17 @@ export default async function DestinasiDetailPage({
                   <div className="w-8 h-8 rounded-xl bg-tosca/10 flex items-center justify-center shrink-0 mt-0.5">
                     <MapPin className="w-4 h-4 text-tosca-tua" />
                   </div>
+
                   <div>
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-biru-tua mb-1">
+                    <h3
+                      className="text-xs font-bold uppercase tracking-wider text-biru-tua mb-1"
+                      style={{
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                      }}
+                    >
                       Alamat Lengkap
                     </h3>
+
                     <p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
                       {destinasi.alamat}
                     </p>
@@ -295,35 +329,50 @@ export default async function DestinasiDetailPage({
               </div>
             )}
 
-            {/* Tombol Aksi - Menyesuaikan Gaya Tombol Landing Page Maloka */}
+            {/* Tombol Aksi */}
             <div className="mt-8 flex flex-wrap items-center gap-3.5">
               {/* Tombol Utama: Pesan Tiket & Layanan */}
               <Link
                 href="/pesan"
-                className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua hover:from-tosca-tua hover:to-biru-tua text-white shadow-md hover:shadow-lg hover:shadow-tosca/30`}
+                className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua hover:from-tosca-tua hover:to-biru-tua text-white shadow-[0_8px_25px_rgba(14,59,76,0.6)] hover:shadow-lg hover:shadow-tosca/30`}
               >
-                <span>Pesan Tiket & Layanan</span>
+                <span
+                  style={{
+                    textShadow: '0 2px 5px rgba(0, 0, 0, 0.9)',
+                  }}
+                >
+                  Pesan Tiket & Layanan
+                </span>
+
                 <ArrowRight className={BTN_ARROW} />
               </Link>
 
               {/* Tombol Sekunder: Cek Status Pesanan */}
               <Link
                 href="/cek-pesanan"
-                className={`${BTN_BASE} ${BTN_MD} border-2 border-biru-tua text-biru-tua hover:bg-biru-muda shadow-xs hover:shadow-md hover:shadow-biru-tua/20`}
+                className={`${BTN_BASE} ${BTN_MD} border-2 border-biru-tua text-biru-tua hover:bg-biru-muda shadow-[0_6px_20px_rgba(14,59,76,0.35)] hover:shadow-lg hover:shadow-biru-tua/20`}
               >
                 <CalendarCheck className="w-4 h-4 text-biru-tua" />
-                <span>Cek Status Pesanan</span>
+
+                <span
+                  style={{
+                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)',
+                  }}
+                >
+                  Cek Status Pesanan
+                </span>
+
                 <ArrowRight className={BTN_ARROW} />
               </Link>
             </div>
           </div>
 
-          {/* Kolom Kanan: Foto Pendamping yang Berbeda dari Hero, Relevan dengan Destinasi */}
+          {/* Kolom Kanan: Foto Pendamping */}
           <div className="lg:col-span-5">
             <div className="relative aspect-4/3 w-full rounded-3xl overflow-hidden shadow-xl border border-gray-100 group">
               <Image
                 src={companionFotoUrl}
-                alt={`${destinasi.nama} - Foto Pendamping`}
+                alt={`${destinasi.nama} Foto Pendamping`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-500"
                 sizes="(max-width: 1024px) 100vw, 40vw"
@@ -344,24 +393,39 @@ export default async function DestinasiDetailPage({
             <span className="text-xs font-bold uppercase tracking-wider text-tosca block mb-1">
               INFORMASI KUNJUNGAN
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+
+            <h2
+              className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight"
+              style={{
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+              }}
+            >
               Kenapa Memilih {destinasi.nama}?
             </h2>
+
             <p className="text-xs sm:text-sm text-gray-500 mt-2">
-              Informasi esensial dan panduan kunjungan resmi untuk merencanakan liburan terbaik Anda.
+              Informasi esensial dan panduan kunjungan resmi untuk merencanakan
+              liburan terbaik Anda.
             </p>
           </div>
 
-          {/* 4 Kolom Fitur dengan Ikon Minimalis Bersejajar */}
+          {/* 4 Kolom Fitur */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {/* Fitur 1: Harga Tiket */}
             <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xs text-center flex flex-col items-center group hover:border-tosca/40 hover:shadow-md transition-all duration-300">
               <div className="w-14 h-14 rounded-2xl bg-tosca/10 text-tosca-tua flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Ticket className="w-6 h-6 stroke-[1.8]" />
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1">
+
+              <h3
+                className="text-base font-bold text-gray-900 mb-1"
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                }}
+              >
                 {formattedHarga}
               </h3>
+
               <p className="text-xs text-gray-500 leading-relaxed">
                 Harga tiket resmi masuk kawasan wisata per orang.
               </p>
@@ -372,9 +436,16 @@ export default async function DestinasiDetailPage({
               <div className="w-14 h-14 rounded-2xl bg-teal-50 text-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Clock className="w-6 h-6 stroke-[1.8]" />
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1">
+
+              <h3
+                className="text-base font-bold text-gray-900 mb-1"
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                }}
+              >
                 {destinasi.jamBuka} - {destinasi.jamTutup} WIB
               </h3>
+
               <p className="text-xs text-gray-500 leading-relaxed">
                 Jadwal operasional harian yang teratur untuk wisatawan.
               </p>
@@ -385,9 +456,16 @@ export default async function DestinasiDetailPage({
               <div className="w-14 h-14 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Landmark className="w-6 h-6 stroke-[1.8]" />
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1 truncate max-w-full">
+
+              <h3
+                className="text-base font-bold text-gray-900 mb-1 truncate max-w-full"
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                }}
+              >
                 {destinasi.kategori.nama}
               </h3>
+
               <p className="text-xs text-gray-500 leading-relaxed truncate max-w-full">
                 {destinasi.lokasi}
               </p>
@@ -398,9 +476,16 @@ export default async function DestinasiDetailPage({
               <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <ShieldCheck className="w-6 h-6 stroke-[1.8]" />
               </div>
-              <h3 className="text-base font-bold text-gray-900 mb-1">
+
+              <h3
+                className="text-base font-bold text-gray-900 mb-1"
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                }}
+              >
                 Layanan Terpadu Maloka
               </h3>
+
               <p className="text-xs text-gray-500 leading-relaxed">
                 Pemesanan tiket, tour guide, dan paket jeep resmi tanpa antre.
               </p>
@@ -418,18 +503,34 @@ export default async function DestinasiDetailPage({
             <span className="text-xs font-bold uppercase tracking-wider text-tosca block mb-1">
               PAKET & LAYANAN RESMI
             </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+
+            <h2
+              className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight"
+              style={{
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+              }}
+            >
               Pilihan Layanan di {destinasi.nama}
             </h2>
+
             <p className="text-xs sm:text-sm text-gray-500 mt-1">
-              Pesan tiket, pemandu wisata berlisensi HPI, atau transportasi langsung melalui Maloka.
+              Pesan tiket, pemandu wisata berlisensi HPI, atau transportasi
+              langsung melalui Maloka.
             </p>
           </div>
+
           <Link
             href="/pesan"
-            className={`${BTN_BASE} h-9 px-5 text-xs text-tosca-tua border border-tosca/50 hover:bg-tosca hover:text-white shadow-2xs hover:shadow-sm`}
+            className={`${BTN_BASE} h-9 px-5 text-xs text-tosca-tua border border-tosca/50 hover:bg-tosca hover:text-white shadow-[0_6px_14px_rgba(26,163,198,0.3)] hover:shadow-lg hover:shadow-tosca/30`}
           >
-            <span>Lihat Semua Paket</span>
+            <span
+              style={{
+                textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)',
+              }}
+            >
+              Lihat Semua Paket
+            </span>
+
             <ArrowRight className={BTN_ARROW} />
           </Link>
         </div>
@@ -439,17 +540,23 @@ export default async function DestinasiDetailPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {destinasi.layanans.map((layanan) => {
               const price = Number(layanan.harga) || 0
+
               return (
                 <div
                   key={layanan.id}
                   className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs hover:shadow-lg hover:border-tosca/30 transition-all duration-300 flex flex-col justify-between group"
                 >
                   <div>
-
                     {/* Judul & Deskripsi Layanan */}
-                    <h3 className="text-sm font-bold text-gray-900 group-hover:text-tosca-tua transition-colors line-clamp-2 leading-snug">
+                    <h3
+                      className="text-sm font-bold text-gray-900 group-hover:text-tosca-tua transition-colors line-clamp-2 leading-snug"
+                      style={{
+                        textShadow: '0 1px 2px rgba(0, 0, 0, 0.12)',
+                      }}
+                    >
                       {layanan.nama}
                     </h3>
+
                     {layanan.deskripsi && (
                       <p className="text-xs text-gray-500 mt-2 line-clamp-3 leading-relaxed">
                         {layanan.deskripsi}
@@ -457,19 +564,35 @@ export default async function DestinasiDetailPage({
                     )}
                   </div>
 
-                  {/* Footer: Harga & Tombol Pesan - Konsisten Landing Page Pill Button */}
+                  {/* Footer: Harga & Tombol Pesan */}
                   <div className="mt-6 pt-4 border-t border-gray-100 flex items-center justify-between gap-2">
                     <div>
-                      <span className="text-[10px] text-gray-400 block font-medium">Harga</span>
-                      <span className="text-sm sm:text-base font-black text-gray-900">
+                      <span className="text-[10px] text-gray-400 block font-medium">
+                        Harga
+                      </span>
+
+                      <span
+                        className="text-sm sm:text-base font-black text-gray-900"
+                        style={{
+                          textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                        }}
+                      >
                         Rp {price.toLocaleString('id-ID')}
                       </span>
                     </div>
+
                     <Link
                       href={`/pesan?layananId=${layanan.id}`}
-                      className={`${BTN_BASE} h-9 px-4 text-xs text-white bg-linear-to-r from-tosca to-biru-tua shadow-xs hover:shadow-md hover:shadow-tosca/25`}
+                      className={`${BTN_BASE} h-9 px-4 text-xs text-white bg-linear-to-r from-tosca to-biru-tua shadow-[0_6px_20px_rgba(14,59,76,0.45)] hover:shadow-md hover:shadow-tosca/25`}
                     >
-                      <span>Pesan</span>
+                      <span
+                        style={{
+                          textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)',
+                        }}
+                      >
+                        Pesan
+                      </span>
+
                       <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
                     </Link>
                   </div>
@@ -480,18 +603,33 @@ export default async function DestinasiDetailPage({
         ) : (
           /* Fallback jika tidak ada layanan khusus */
           <div className="p-8 rounded-3xl bg-biru-muda/30 border border-tosca/20 text-center max-w-2xl mx-auto">
-            <h3 className="text-base font-bold text-gray-900">
+            <h3
+              className="text-base font-bold text-gray-900"
+              style={{
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+              }}
+            >
               Pemesanan Tiket & Paket Wisata
             </h3>
+
             <p className="text-xs sm:text-sm text-gray-500 mt-1 max-w-md mx-auto">
-              Layanan khusus untuk {destinasi.nama} dapat dipesan melalui formulir reservasi resmi Maloka.
+              Layanan khusus untuk {destinasi.nama} dapat dipesan melalui
+              formulir reservasi resmi Maloka.
             </p>
+
             <div className="mt-5">
               <Link
                 href="/pesan"
-                className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua text-white shadow-md hover:shadow-lg hover:shadow-tosca/30`}
+                className={`${BTN_BASE} ${BTN_MD} bg-linear-to-r from-tosca to-biru-tua text-white shadow-[0_8px_25px_rgba(14,59,76,0.6)] hover:shadow-lg hover:shadow-tosca/30`}
               >
-                <span>Buka Formulir Pemesanan</span>
+                <span
+                  style={{
+                    textShadow: '0 2px 5px rgba(0, 0, 0, 0.9)',
+                  }}
+                >
+                  Buka Formulir Pemesanan
+                </span>
+
                 <ArrowRight className={BTN_ARROW} />
               </Link>
             </div>
@@ -509,15 +647,29 @@ export default async function DestinasiDetailPage({
               <span className="text-xs font-bold uppercase tracking-wider text-tosca block mb-1">
                 EKSPLORASI LEBIH JAUH
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight">
+
+              <h2
+                className="text-2xl sm:text-3xl font-black text-gray-900 tracking-tight"
+                style={{
+                  textShadow: '0 1px 2px rgba(0, 0, 0, 0.15)',
+                }}
+              >
                 Destinasi Terkait di Magelang
               </h2>
             </div>
+
             <Link
               href="/wisata"
-              className={`${BTN_BASE} h-8 px-4 text-xs border border-tosca text-tosca hover:bg-tosca hover:text-white shadow-2xs hover:shadow-xs`}
+              className={`${BTN_BASE} h-8 px-4 text-xs border border-tosca text-tosca hover:bg-tosca hover:text-white shadow-[0_6px_14px_rgba(26,163,198,0.3)] hover:shadow-lg hover:shadow-tosca/30`}
             >
-              <span>Lihat Semua</span>
+              <span
+                style={{
+                  textShadow: '0 1px 3px rgba(0, 0, 0, 0.4)',
+                }}
+              >
+                Lihat Semua
+              </span>
+
               <ArrowRight className={BTN_ARROW} />
             </Link>
           </div>

@@ -92,7 +92,15 @@ export default function DestinasiCard({ destinasi }: DestinasiCardProps) {
         </div>
 
         {/* Full-width Rounded White Button */}
-        <div className="mt-3.5 w-full py-2.5 px-4 rounded-xl bg-white group-hover:bg-tosca text-biru-tua group-hover:text-white font-bold text-xs sm:text-sm text-center shadow-md transition-all duration-300">
+        <div
+          className="mt-3.5 w-full py-2.5 px-4 rounded-xl bg-white group-hover:bg-tosca text-biru-tua group-hover:text-white font-bold text-xs sm:text-sm text-center
+          shadow-[0_5px_0_rgba(0,0,0,0.35),0_8px_18px_rgba(0,0,0,0.65)]
+          group-hover:shadow-[0_5px_0_rgba(0,0,0,0.3),0_8px_20px_rgba(0,0,0,0.5)]
+          transition-all duration-300"
+          style={{
+            textShadow: '0 1px 2px rgba(0,0,0,0.35), 0 2px 5px rgba(0,0,0,0.25)',
+          }}
+        >
           Detail Wisata
         </div>
       </div>
